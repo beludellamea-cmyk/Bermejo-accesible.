@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chat intercultural | Bermejo Accesible</title>
+  <meta name="description" content="Conversación presencial con propuestas de traducción automática entre español y lenguas presentes en Formosa.">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/preferencias.js"></script>
+  <script src="js/asistente-global.js" defer></script>
+  <script src="js/chat-config.js"></script>
+  <script src="js/qom.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="index.html">
+        <svg class="marca__logo" viewBox="0 0 64 52" width="64" height="52" aria-hidden="true" focusable="false">
+          <path class="logo__pagina" d="M32 13 C25 7 13 6 4 9 V44 C13 41 25 42 32 48 Z"/>
+          <path class="logo__pagina" d="M32 13 C39 7 51 6 60 9 V44 C51 41 39 42 32 48 Z"/>
+          <path class="logo__rio" d="M9 35 C15 35 16 25 22 25 C28 25 28 36 34 36 C40 36 41 22 47 22 C51 22 53 26 55 27"/>
+        </svg>
+        <span class="marca__textos">
+          <span class="marca__nombre">Bermejo <span class="marca__acento">Accesible</span></span>
+          <span class="marca__lema">La información a tu manera</span>
+        </span>
+      </a>
+      <nav class="nav-principal" aria-label="Principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="material.html">Acceder a mi material</a></li>
+          <li><a href="docente.html">Espacio docente</a></li>
+          <li><a href="qom.html" aria-current="page">Chat intercultural</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="ajustes" role="region" aria-labelledby="ajustes-titulo">
+      <div class="contenedor ajustes__fila">
+        <p class="ajustes__titulo" id="ajustes-titulo">Ajustes de lectura</p>
+        <div class="ajustes__grupo" role="group" aria-labelledby="letra-etiqueta">
+          <span class="ajustes__etiqueta" id="letra-etiqueta">Letra:</span>
+          <button type="button" class="boton boton--letra-mayuscula" data-letra-opcion="mayuscula" aria-pressed="true">Imprenta mayúscula</button>
+          <span class="ajustes__barra" aria-hidden="true">/</span>
+          <button type="button" class="boton boton--letra-habitual" data-letra-opcion="habitual" aria-pressed="false">Texto habitual</button>
+        </div>
+        <div class="ajustes__grupo" role="group" aria-labelledby="tam-etiqueta">
+          <span class="ajustes__etiqueta" id="tam-etiqueta">Tamaño del texto:</span>
+          <button type="button" class="boton" data-ajuste="achicar">Más chico</button>
+          <span class="ajustes__valor" id="tam-valor">100 %</span>
+          <button type="button" class="boton" data-ajuste="agrandar">Más grande</button>
+        </div>
+        <div class="ajustes__grupo" role="group" aria-labelledby="con-etiqueta">
+          <span class="ajustes__etiqueta" id="con-etiqueta">Contraste:</span>
+          <button type="button" class="boton" data-contraste-opcion="normal" aria-pressed="true">Normal</button>
+          <button type="button" class="boton" data-contraste-opcion="alto" aria-pressed="false">Alto</button>
+        </div>
+        <button type="button" class="boton" data-ajuste="restablecer">Restablecer ajustes</button>
+        <p class="visualmente-oculto" id="ajustes-anuncio" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </header>
+
+<main id="contenido" tabindex="-1">
+ <div class="contenedor qom chat-intercultural">
+  <h1>Chat intercultural</h1>
+  <p class="intro">Para conversar cara a cara en la escuela. Una persona escribe, la IA propone una traducción y la otra responde en esta misma pantalla.</p>
+  <div class="aviso" role="note">
+   <p><strong>Traducción automática en revisión.</strong> La IA puede equivocarse, especialmente con lenguas y variedades con pocos recursos digitales. Mostramos siempre el mensaje original. Si algo no se entiende, pidan que lo expliquen de otra forma o consulten a una persona hablante de la comunidad.</p>
+   <p>Necesita conexión a internet. Los mensajes se envían al servicio de IA para traducirse; no escriban nombres, diagnósticos ni otros datos personales. La página no guarda el historial: se pierde al cerrar o recargar.</p>
+  </div>
+  <p id="chat-servicio" role="status" aria-live="polite"></p>
+  <fieldset class="chat-intercultural__idioma">
+   <legend>¿Qué lengua se habla en esta conversación?</legend>
+   <label for="chat-lengua">Elegí la lengua del estudiante</label>
+   <select id="chat-lengua">
+    <option value="qom">Qom</option>
+    <option value="wichi">Wichí</option>
+    <option value="pilaga">Pilagá</option>
+    <option value="nivacle">Nivaclé</option>
+    <option value="guarani">Guaraní</option>
+   </select>
+   <p class="ayuda">Las variedades locales pueden diferir. Comprobá las traducciones con personas hablantes de la comunidad.</p>
+  </fieldset>
+  <section aria-labelledby="chat-conversacion-titulo">
+   <h2 id="chat-conversacion-titulo">Conversación</h2>
+   <ol id="chat-mensajes" class="qom__conversacion" aria-live="polite" aria-relevant="additions" aria-label="Mensajes de esta conversación"></ol>
+   <p id="chat-vacio">Aún no hay mensajes. Elegí quién escribe y empezá.</p>
+  </section>
+  <section aria-labelledby="chat-enviar-titulo">
+   <h2 id="chat-enviar-titulo">Escribí un mensaje</h2>
+   <form id="chat-form">
+    <fieldset class="chat-intercultural__rol">
+     <legend>¿Quién escribe?</legend>
+     <label><input type="radio" name="chat-rol" value="estudiante" checked> Estudiante: escribo en mi lengua y veo español</label>
+     <label><input type="radio" name="chat-rol" value="docente"> Docente: escribo en español y veo la otra lengua</label>
+    </fieldset>
+    <label for="chat-texto" id="chat-texto-label">Tu mensaje</label>
+    <textarea id="chat-texto" rows="4" maxlength="500" required placeholder="Escribí lo que querés decir"></textarea>
+    <p class="ayuda">Mensajes cortos y claros ayudan a revisar el sentido. Podés usar el chat para decir lo que quieras: no depende de frases cargadas de antemano.</p>
+    <div class="fila-botones"><button id="chat-traducir" class="boton boton--principal" type="submit">Traducir y mostrar mensaje</button><button id="chat-limpiar" class="boton" type="button">Borrar conversación</button></div>
+   </form>
+   <p id="chat-estado" role="status" aria-live="polite"></p>
+   <p id="chat-error" role="alert" hidden></p>
+  </section>
+  <p><a href="index.html">Volver al inicio</a></p>
+ </div>
+</main>
+  <footer class="pie">
+    <div class="contenedor">
+      <p><strong>Bermejo Accesible</strong> («La información a tu manera») es un proyecto de código abierto creado para una hackatón en Formosa. Funciona en el navegador: no pide cuentas y no guarda tus materiales.</p>
+      <p>Los pictogramas que se muestran en «Texto con pictogramas» son de Sergio Palao. Origen: <a href="https://arasaac.org">ARASAAC</a>. Licencia: Creative Commons BY-NC-SA. Propiedad: Gobierno de Aragón (España).</p>
+      <p>Extracción de texto con <a href="https://tesseract.projectnaptha.com/">Tesseract.js</a> y <a href="https://mozilla.github.io/pdf.js/">PDF.js</a>. Tipografía <a href="https://www.brailleinstitute.org/freefont/">Atkinson Hyperlegible</a>, creada por Braille Institute. La letra en imprenta mayúscula usa «Bermejo Mayúscula», una adaptación de DejaVu Sans (licencia Bitstream Vera).</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1260,3 +1260,15 @@ html[data-contraste="alto"] .fundamento__etiqueta { color: #000000; }
 .lamina figcaption { padding: .6rem; font-weight: bold; }
 @media (max-width: 45rem) { .laminas-formosa { grid-template-columns: minmax(0, 1fr); } .lamina { max-width: 26rem; } }
 @media (forced-colors: active) { .lamina { border-color: CanvasText; } }
+
+/* Conversación intercultural, legible a 320 px y con zoom. */
+.qom label { display: block; font-weight: 700; margin-block: 1rem .35rem; }
+.qom textarea, .qom select, .qom input[type="text"], .qom input[type="file"] { display: block; width: 100%; max-width: 100%; font: inherit; padding: .8rem; border: 2px solid currentColor; border-radius: .45rem; background: var(--superficie); color: var(--tinta); }
+.qom select { max-width: 24rem; }
+.qom__conversacion { list-style: none; padding: 0; display: grid; gap: 1rem; }
+.qom__conversacion li { padding: 1rem; border: 2px solid currentColor; border-radius: .6rem; overflow-wrap: anywhere; }
+.qom__conversacion h3 { margin-top: 0; }
+.chat-intercultural__rol label { display: block; font-weight: normal; }
+.chat-intercultural__rol input[type="radio"] { width: auto; display: inline; accent-color: var(--accion-fondo); }
+.chat-intercultural fieldset { min-width: 0; margin-block: 1.5rem; border: 2px solid var(--borde); padding: 1rem; }
+@media print { .chat-intercultural form, .chat-intercultural__idioma, .ayuda-lanzadores { display: none !important; } }

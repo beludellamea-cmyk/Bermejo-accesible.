@@ -749,6 +749,7 @@
     programarRender();
   });
 
+
   $('#descargar-txt').addEventListener('click', function () {
     var blob = new Blob([el.editable.value], { type: 'text/plain;charset=utf-8' });
     var url = URL.createObjectURL(blob);

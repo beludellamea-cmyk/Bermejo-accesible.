@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chat intercultural | Bermejo Accesible</title>
+  <meta name="description" content="Conversación presencial con propuestas de traducción automática entre español y lenguas presentes en Formosa.">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/preferencias.js"></script>
+  <script src="js/asistente-global.js" defer></script>
+  <script src="js/chat-config.js"></script>
+  <script src="js/qom.js" defer></script>
+</head>
+<body>
+{{CABECERA}}
+<main id="contenido" tabindex="-1">
+ <div class="contenedor qom chat-intercultural">
+  <h1>Chat intercultural</h1>
+  <p class="intro">Para conversar cara a cara en la escuela. Una persona escribe, la IA propone una traducción y la otra responde en esta misma pantalla.</p>
+  <div class="aviso" role="note">
+   <p><strong>Traducción automática en revisión.</strong> La IA puede equivocarse, especialmente con lenguas y variedades con pocos recursos digitales. Mostramos siempre el mensaje original. Si algo no se entiende, pidan que lo expliquen de otra forma o consulten a una persona hablante de la comunidad.</p>
+   <p>Necesita conexión a internet. Los mensajes se envían al servicio de IA para traducirse; no escriban nombres, diagnósticos ni otros datos personales. La página no guarda el historial: se pierde al cerrar o recargar.</p>
+  </div>
+  <p id="chat-servicio" role="status" aria-live="polite"></p>
+  <fieldset class="chat-intercultural__idioma">
+   <legend>¿Qué lengua se habla en esta conversación?</legend>
+   <label for="chat-lengua">Elegí la lengua del estudiante</label>
+   <select id="chat-lengua">
+    <option value="qom">Qom</option>
+    <option value="wichi">Wichí</option>
+    <option value="pilaga">Pilagá</option>
+    <option value="nivacle">Nivaclé</option>
+    <option value="guarani">Guaraní</option>
+   </select>
+   <p class="ayuda">Las variedades locales pueden diferir. Comprobá las traducciones con personas hablantes de la comunidad.</p>
+  </fieldset>
+  <section aria-labelledby="chat-conversacion-titulo">
+   <h2 id="chat-conversacion-titulo">Conversación</h2>
+   <ol id="chat-mensajes" class="qom__conversacion" aria-live="polite" aria-relevant="additions" aria-label="Mensajes de esta conversación"></ol>
+   <p id="chat-vacio">Aún no hay mensajes. Elegí quién escribe y empezá.</p>
+  </section>
+  <section aria-labelledby="chat-enviar-titulo">
+   <h2 id="chat-enviar-titulo">Escribí un mensaje</h2>
+   <form id="chat-form">
+    <fieldset class="chat-intercultural__rol">
+     <legend>¿Quién escribe?</legend>
+     <label><input type="radio" name="chat-rol" value="estudiante" checked> Estudiante: escribo en mi lengua y veo español</label>
+     <label><input type="radio" name="chat-rol" value="docente"> Docente: escribo en español y veo la otra lengua</label>
+    </fieldset>
+    <label for="chat-texto" id="chat-texto-label">Tu mensaje</label>
+    <textarea id="chat-texto" rows="4" maxlength="500" required placeholder="Escribí lo que querés decir"></textarea>
+    <p class="ayuda">Mensajes cortos y claros ayudan a revisar el sentido. Podés usar el chat para decir lo que quieras: no depende de frases cargadas de antemano.</p>
+    <div class="fila-botones"><button id="chat-traducir" class="boton boton--principal" type="submit">Traducir y mostrar mensaje</button><button id="chat-limpiar" class="boton" type="button">Borrar conversación</button></div>
+   </form>
+   <p id="chat-estado" role="status" aria-live="polite"></p>
+   <p id="chat-error" role="alert" hidden></p>
+  </section>
+  <p><a href="index.html">Volver al inicio</a></p>
+ </div>
+</main>
+{{PIE}}
+</body>
+</html>

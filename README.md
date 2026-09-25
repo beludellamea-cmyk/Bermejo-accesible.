@@ -1,5 +1,19 @@
 # Bermejo Accesible
 
+## Chat intercultural con IA (requiere conectar un servicio)
+
+`qom.html` es una conversación presencial en un solo dispositivo. El estudiante puede escribir en qom, wichí, pilagá, nivaclé o guaraní; el docente escribe en español. La IA intenta traducir **cualquier frase nueva**, no usa un repertorio cerrado. Conserva hasta seis turnos de contexto para interpretar respuestas cortas; ambos textos se ven juntos. Cada traducción se identifica como automática y puede corregirse en la página. No es una conversación entre celulares. Los mensajes no se guardan al recargar.
+
+**La traducción no estará activa hasta completar los siguientes pasos.** El ZIP trae todo el código, pero no trae claves de terceros ni un servicio de IA alojado. GitHub Pages no ejecuta `backend/chat-worker.js`. La clave **nunca** se pega en un archivo de GitHub.
+
+1. Creá una clave de la [API de Gemini en Google AI Studio](https://aistudio.google.com/app/apikey). La disponibilidad y los límites del servicio dependen de esa cuenta. No pegues la clave en el chat ni en el repositorio.
+2. Creá un [Cloudflare Worker desde el panel](https://developers.cloudflare.com/workers/get-started/dashboard/) y pegá el contenido de `backend/chat-worker.js` como código del Worker. Publicalo para obtener su URL `https://…workers.dev`.
+3. En **Settings → Variables and Secrets** del Worker, agregá `GEMINI_API_KEY` como **Secret** (valor: la clave obtenida en Google AI Studio). Agregá `ALLOWED_ORIGIN` como variable de texto con el origen exacto `https://beludellamea-cmyk.github.io`. Si tu repositorio pertenece a otra cuenta, reemplazá el origen. Opcional: `GEMINI_MODEL` con el identificador de un modelo compatible; el código usa `gemini-3.8-flash` si se omite.
+4. Este ZIP ya trae en `js/chat-config.js` la URL pública `https://bermejochat.beludellamea.workers.dev/`. Subí los archivos del sitio a GitHub Pages. Si cambiás de Worker en el futuro, actualizá solo esa dirección. Nunca subas la clave.
+5. Probá un mensaje nuevo que no esté en ningún diccionario, por ejemplo «Hola, ¿cómo estás?» escrito por el docente. Luego seleccioná «Estudiante» y probá responder en la lengua elegida. **No des por correcta una frase indígena solo porque la IA la generó**: hacela revisar por una persona hablante de la variedad local antes de presentar su contenido como traducción fiable.
+
+El servicio hace una traducción **experimental** con un modelo general. No se probó que Gemini traduzca bien todas las lenguas ofrecidas. La investigación [QomL’aqtaqa (2026)](https://aclanthology.org/2026.americasnlp-6.17/) describe modelos especializados para qom ↔ español, pero tampoco garantiza resultados adecuados para conversaciones escolares locales. Para avanzar conviene evaluar mensajes con docentes bilingües y representantes de cada comunidad. El servicio recibe los mensajes para procesarlos; evitá datos personales y revisá las condiciones de privacidad y cuotas de Google antes de usarlo con estudiantes.
+
 **La información a tu manera.**
 
 Bermejo Accesible es una web para sacar el texto de un material (texto pegado, PDF o foto) y leerlo de la forma que mejor le sirva a cada estudiante. También tiene un espacio para docentes con:
@@ -84,6 +98,7 @@ Todo el contenido docente está marcado como **sujeto a revisión docente**.
 index.html              Portada: dos caminos y «¿Usás un lector de pantalla?»
 material.html           Recorrido del estudiante
 docente.html            Espacio docente
+qom.html                Chat intercultural presencial con traducción de IA
 icono.svg               Ícono de la pestaña (símbolo del logo)
 img/logo-bermejo-accesible.svg   Logo con el nombre (para presentaciones)
 css/estilos.css         Estilos
@@ -94,6 +109,9 @@ js/video.js             Reproducción local de video, subtítulos y transcripci�
 js/ilustraciones.js     Dibujos para «Texto con imágenes»
 js/docente.js           Guía, revisor y filtro de normativa
 js/consulta.js          «Contame qué pasa en tu aula»
+js/qom.js               Conversación y correcciones en pantalla
+js/chat-config.js       URL pública del servicio de traducción
+backend/chat-worker.js  Servicio para Cloudflare Workers (clave en secreto)
 fuentes/                Fuente «Bermejo Mayúscula» (regular y negrita) y su licencia
 ejemplos/               Materiales de prueba (TXT, PDF, foto, video y VTT)
 _partes/                Fuentes de las páginas y scripts para regenerarlas
@@ -159,14 +177,15 @@ GitHub Pages usa HTTPS, que la cámara del celular necesita.
 
 ## Editar las páginas
 
-La cabecera y el pie se comparten entre las tres páginas.
-- **Páginas:** editar los archivos de `_partes/` y ejecutar `python3 _partes/construir.py` para regenerar `index.html`, `material.html` y `docente.html`.
+La cabecera y el pie se comparten entre las cuatro páginas.
+- **Páginas:** editar los archivos de `_partes/` y ejecutar `python3 _partes/construir.py` para regenerar `index.html`, `material.html`, `docente.html` y `qom.html`.
 - **Fuente de mayúsculas:** se regenera con `python3 _partes/fuente_mayuscula.py`, que necesita `fontTools` y DejaVu Sans.
 
 ## Privacidad y dependencias externas
 
-- **Sin cuentas ni servidor propio.** Los materiales y las consultas docentes se procesan en el navegador y no se guardan.
-- **Qué se guarda.** Solo las preferencias de letra, tamaño y contraste, en `localStorage`.
+- **Materiales y consultas docentes.** Se procesan en el navegador y no se guardan.
+- **Chat intercultural.** Al activarlo, los mensajes y hasta seis turnos previos se envían al Worker y al proveedor de IA. El historial visible se borra al cerrar o recargar la página; las políticas y el tratamiento de datos del proveedor requieren revisión antes de uso escolar. El Worker no incluye almacenamiento propio.
+- **Qué se guarda en este navegador.** Solo las preferencias de letra, tamaño y contraste, en `localStorage`.
 - **Qué se descarga, y solo cuando hace falta:**
   - PDF.js 3.11.174 desde jsDelivr;
   - Tesseract.js 5.1.1 desde jsDelivr, con los datos del idioma español;
