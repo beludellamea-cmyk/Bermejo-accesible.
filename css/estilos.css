@@ -1262,6 +1262,12 @@ html[data-contraste="alto"] .fundamento__etiqueta { color: #000000; }
 @media (forced-colors: active) { .lamina { border-color: CanvasText; } }
 
 /* Conversación intercultural, legible a 320 px y con zoom. */
+.voz-navegacion { margin-block: 1rem; padding-block: 1rem; border: 2px solid var(--borde); border-radius: var(--radio); background: var(--superficie); }
+.voz-navegacion h2 { font-size: 1.25rem; margin-block: 0 .5rem; }
+.voz-navegacion p { max-width: 70ch; }
+.voz-navegacion .fila-botones { display: flex; flex-wrap: wrap; gap: .6rem; }
+#voz-navegacion-estado { min-height: 1.5em; overflow-wrap: anywhere; }
+@media (max-width: 30rem) { .voz-navegacion .boton { flex: 1 1 100%; } }
 .qom label { display: block; font-weight: 700; margin-block: 1rem .35rem; }
 .qom textarea, .qom select, .qom input[type="text"], .qom input[type="file"] { display: block; width: 100%; max-width: 100%; font: inherit; padding: .8rem; border: 2px solid currentColor; border-radius: .45rem; background: var(--superficie); color: var(--tinta); }
 .qom select { max-width: 24rem; }

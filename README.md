@@ -16,6 +16,10 @@ El servicio hace una traducción **experimental** con un modelo general. No se p
 
 **La información a tu manera.**
 
+### Navegación por voz (portada, material y espacio docente)
+
+En estas tres páginas hay un botón **«Usar voz»**. Solo escucha después de pulsarlo, reconoce una frase en español y se detiene; el botón **«Detener micrófono»** permite cancelarlo antes. La instrucción reconocida y el resultado se muestran por escrito. Comandos: «abrir material», «ir a docente», «inicio», «ir al chat», «ayuda», «agrandar letra», «alto contraste», «imprenta mayúscula», «texto habitual»; en la sección docente, «consulta», «ideas» y «normativa». Para dictar, seleccioná un campo de texto y decí «dictar» seguido del mensaje. Revisá lo escrito antes de usarlo. El permiso para usar micrófono lo solicita el navegador. Si el navegador no ofrece reconocimiento de voz, los botones y los lectores de pantalla siguen disponibles. El reconocimiento puede procesar el audio en un servicio del navegador; evitá datos personales. **La sección de traducciones no tiene micrófono ni comandos de voz**; sus lenguas necesitan pruebas específicas con hablantes.
+
 Bermejo Accesible es una web para sacar el texto de un material (texto pegado, PDF o foto) y leerlo de la forma que mejor le sirva a cada estudiante. También tiene un espacio para docentes con:
 - una consulta por situación,
 - una guía para detectar barreras,
@@ -109,6 +113,7 @@ js/video.js             Reproducción local de video, subtítulos y transcripci�
 js/ilustraciones.js     Dibujos para «Texto con imágenes»
 js/docente.js           Guía, revisor y filtro de normativa
 js/consulta.js          «Contame qué pasa en tu aula»
+js/voz-navegacion.js    Comandos voluntarios por voz en español (excepto chat)
 js/qom.js               Conversación y correcciones en pantalla
 js/chat-config.js       URL pública del servicio de traducción
 backend/chat-worker.js  Servicio para Cloudflare Workers (clave en secreto)
