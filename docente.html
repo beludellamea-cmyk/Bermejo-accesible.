@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espacio docente | Bermejo Accesible</title>
+  <meta name="description" content="Guía para detectar barreras en materiales educativos, ideas prácticas, revisor de textos y normativa de Formosa y Argentina, con la Resolución 2481/24.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;display=swap">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/preferencias.js"></script>
+  <script src="js/asistente-global.js" defer></script>
+  <script src="js/docente.js" defer></script>
+  <script src="js/consulta.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="index.html">
+        <svg class="marca__logo" viewBox="0 0 64 52" width="64" height="52" aria-hidden="true" focusable="false">
+          <path class="logo__pagina" d="M32 13 C25 7 13 6 4 9 V44 C13 41 25 42 32 48 Z"/>
+          <path class="logo__pagina" d="M32 13 C39 7 51 6 60 9 V44 C51 41 39 42 32 48 Z"/>
+          <path class="logo__rio" d="M9 35 C15 35 16 25 22 25 C28 25 28 36 34 36 C40 36 41 22 47 22 C51 22 53 26 55 27"/>
+        </svg>
+        <span class="marca__textos">
+          <span class="marca__nombre">Bermejo <span class="marca__acento">Accesible</span></span>
+          <span class="marca__lema">La información a tu manera</span>
+        </span>
+      </a>
+      <nav class="nav-principal" aria-label="Principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="material.html">Acceder a mi material</a></li>
+          <li><a href="docente.html" aria-current="page">Espacio docente</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="ajustes" role="region" aria-labelledby="ajustes-titulo">
+      <div class="contenedor ajustes__fila">
+        <p class="ajustes__titulo" id="ajustes-titulo">Ajustes de lectura</p>
+        <div class="ajustes__grupo" role="group" aria-labelledby="letra-etiqueta">
+          <span class="ajustes__etiqueta" id="letra-etiqueta">Letra:</span>
+          <button type="button" class="boton boton--letra-mayuscula" data-letra-opcion="mayuscula" aria-pressed="true">Imprenta mayúscula</button>
+          <span class="ajustes__barra" aria-hidden="true">/</span>
+          <button type="button" class="boton boton--letra-habitual" data-letra-opcion="habitual" aria-pressed="false">Texto habitual</button>
+        </div>
+        <div class="ajustes__grupo" role="group" aria-labelledby="tam-etiqueta">
+          <span class="ajustes__etiqueta" id="tam-etiqueta">Tamaño del texto:</span>
+          <button type="button" class="boton" data-ajuste="achicar">Más chico</button>
+          <span class="ajustes__valor" id="tam-valor">100 %</span>
+          <button type="button" class="boton" data-ajuste="agrandar">Más grande</button>
+        </div>
+        <div class="ajustes__grupo" role="group" aria-labelledby="con-etiqueta">
+          <span class="ajustes__etiqueta" id="con-etiqueta">Contraste:</span>
+          <button type="button" class="boton" data-contraste-opcion="normal" aria-pressed="true">Normal</button>
+          <button type="button" class="boton" data-contraste-opcion="alto" aria-pressed="false">Alto</button>
+        </div>
+        <button type="button" class="boton" data-ajuste="restablecer">Restablecer ajustes</button>
+        <p class="visualmente-oculto" id="ajustes-anuncio" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <div class="contenedor">
+      <h1>Espacio docente</h1>
+      <p class="intro">Herramientas para encontrar las barreras de un material y cambiarlo para que todo el curso pueda usarlo.</p>
+
+      <div class="aviso" role="note" aria-labelledby="revision-titulo">
+        <p id="revision-titulo"><strong>Sujeto a revisión docente.</strong></p>
+        <p>Estas orientaciones resumen fuentes públicas y cada una indica de dónde sale. No reemplazan el texto oficial de las normas ni las decisiones del equipo de tu escuela. Revisalas con tu equipo y con la supervisión antes de aplicarlas. Contenido preparado en septiembre de 2026.</p>
+      </div>
+
+      <nav class="indice-pagina" aria-labelledby="en-esta-pagina">
+        <p id="en-esta-pagina"><strong>En esta página:</strong></p>
+        <ul>
+          <li><a href="#consulta">Contame qué pasa en tu aula</a></li>
+          <li><a href="#guia">Guía para detectar barreras</a></li>
+          <li><a href="#ideas">Ideas prácticas</a></li>
+          <li><a href="#revisor">Revisar un texto</a></li>
+          <li><a href="#normativa">Normativa</a></li>
+        </ul>
+      </nav>
+
+      <!-- ================= CONSULTA POR SITUACIÓN ================= -->
+      <section class="seccion-docente" id="consulta" aria-labelledby="consulta-titulo" tabindex="-1">
+        <h2 id="consulta-titulo">Contame qué pasa en tu aula</h2>
+        <p>Escribí la situación con tus palabras. Te muestro la barrera posible, acciones pedagógicas concretas y el fundamento de cada una, con enlace a la fuente.</p>
+        <div class="consulta__aviso-datos" role="note">
+          <p><strong>Sin datos personales.</strong> No escribas nombres, apellidos, documentos, direcciones, teléfonos ni diagnósticos de una persona identificable. Contá la situación en general, por ejemplo: «un estudiante de 3.º año».</p>
+          <p>La consulta se procesa en este dispositivo: no se envía ni se guarda.</p>
+        </div>
+        <noscript><p class="aviso">La consulta necesita JavaScript. Mientras tanto, podés usar la guía y la normativa de esta página.</p></noscript>
+        <form class="consulta__form" id="consulta-form" novalidate>
+          <label class="etiqueta" for="consulta-texto">Describí la situación</label>
+          <p class="ayuda" id="consulta-ayuda">Por ejemplo: «Un estudiante no ve bien el pizarrón y las fotocopias le salen muy chicas» o «Tengo una alumna sorda y los videos no tienen subtítulos».</p>
+          <textarea id="consulta-texto" rows="5" aria-describedby="consulta-ayuda"></textarea>
+          <p class="error-campo" id="consulta-error" hidden></p>
+          <div class="fila-botones">
+            <button type="submit" class="boton boton--principal">Buscar orientaciones</button>
+            <button type="button" class="boton" id="consulta-borrar">Borrar la consulta</button>
+          </div>
+        </form>
+        <div class="consulta__resultado" id="consulta-resultado" aria-live="off"></div>
+        <h3 id="temas-titulo">O elegí un tema</h3>
+        <ul class="consulta__temas" id="consulta-temas" aria-labelledby="temas-titulo"></ul>
+      </section>
+
+      <!-- ================= GUÍA ================= -->
+      <section class="seccion-docente" id="guia" aria-labelledby="guia-titulo" tabindex="-1">
+        <h2 id="guia-titulo">Guía para detectar barreras</h2>
+        <p>Una barrera es todo lo que, en un material, impide o dificulta que alguien entienda o use la información. La barrera está en el material, no en la persona. Tomá un material que uses en clase y marcá lo que ya cumple.</p>
+
+        <form class="chequeo" id="form-chequeo" novalidate>
+          <fieldset>
+            <legend>Texto y lenguaje</legend>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-1" data-idea="idea-lenguaje" aria-describedby="f-1">
+              <div><label for="ch-1">Usa oraciones cortas, palabras conocidas y explica los términos nuevos.</label><span class="fuente" id="f-1">Fuente: pautas de Lectura Fácil (norma UNE 153101 EX) y WCAG 2.2, criterio 3.1.5.</span></div>
+            </div>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-2" data-idea="idea-titulos" aria-describedby="f-2">
+              <div><label for="ch-2">Tiene títulos que ordenan las partes y dicen de qué trata cada una.</label><span class="fuente" id="f-2">Fuente: WCAG 2.2, criterios 1.3.1 y 2.4.6.</span></div>
+            </div>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-3" data-idea="idea-archivos" aria-describedby="f-3">
+              <div><label for="ch-3">El texto se puede agrandar y no está metido dentro de una imagen.</label><span class="fuente" id="f-3">Fuente: WCAG 2.2, criterios 1.4.4 y 1.4.5.</span></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Imágenes y colores</legend>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-4" data-idea="idea-imagenes" aria-describedby="f-4">
+              <div><label for="ch-4">Cada imagen que aporta información tiene una descripción escrita.</label><span class="fuente" id="f-4">Fuente: WCAG 2.2, criterio 1.1.1.</span></div>
+            </div>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-5" data-idea="idea-color" aria-describedby="f-5">
+              <div><label for="ch-5">Nada se explica solo con el color (por ejemplo, «completá lo que está en rojo»).</label><span class="fuente" id="f-5">Fuente: WCAG 2.2, criterio 1.4.1.</span></div>
+            </div>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-6" data-idea="idea-color" aria-describedby="f-6">
+              <div><label for="ch-6">La letra se distingue bien del fondo (buen contraste).</label><span class="fuente" id="f-6">Fuente: WCAG 2.2, criterio 1.4.3 (contraste mínimo 4,5 a 1 para texto común).</span></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Documentos y formatos digitales</legend>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-7" data-idea="idea-archivos" aria-describedby="f-7">
+              <div><label for="ch-7">El PDF tiene texto real que se puede seleccionar, no es solo una foto escaneada.</label><span class="fuente" id="f-7">Fuente: WCAG 2.2, criterio 1.4.5 y guía de contenidos accesibles de argentina.gob.ar.</span></div>
+            </div>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-8" data-idea="idea-titulos" aria-describedby="f-8">
+              <div><label for="ch-8">Los títulos se marcaron con los estilos del procesador de texto (Título 1, Título 2).</label><span class="fuente" id="f-8">Fuente: WCAG 2.2, criterio 1.3.1.</span></div>
+            </div>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-9" data-idea="idea-titulos" aria-describedby="f-9">
+              <div><label for="ch-9">Los enlaces dicen a dónde llevan, en vez de «clic acá».</label><span class="fuente" id="f-9">Fuente: WCAG 2.2, criterio 2.4.4.</span></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Audio y video</legend>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-10" data-idea="idea-video" aria-describedby="f-10">
+              <div><label for="ch-10">Los videos tienen subtítulos.</label><span class="fuente" id="f-10">Fuente: WCAG 2.2, criterio 1.2.2.</span></div>
+            </div>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-11" data-idea="idea-video" aria-describedby="f-11">
+              <div><label for="ch-11">Los audios tienen una transcripción escrita.</label><span class="fuente" id="f-11">Fuente: WCAG 2.2, criterio 1.2.1.</span></div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Actividades y evaluación</legend>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-12" data-idea="idea-formatos" aria-describedby="f-12">
+              <div><label for="ch-12">El contenido se ofrece en más de una forma: texto, imagen, audio o manipulación de objetos.</label><span class="fuente" id="f-12">Fuente: Pautas del Diseño Universal para el Aprendizaje (CAST), principio de representación.</span></div>
+            </div>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-13" data-idea="idea-formatos" aria-describedby="f-13">
+              <div><label for="ch-13">Cada estudiante puede responder de distintas formas: oral, escrita, con dibujos o con apoyos.</label><span class="fuente" id="f-13">Fuente: Pautas del Diseño Universal para el Aprendizaje (CAST), principio de acción y expresión.</span></div>
+            </div>
+            <div class="item-chequeo">
+              <input type="checkbox" id="ch-14" data-idea="idea-consignas" aria-describedby="f-14">
+              <div><label for="ch-14">Las consignas piden una acción por vez y están numeradas.</label><span class="fuente" id="f-14">Fuente: pautas de Lectura Fácil (norma UNE 153101 EX).</span></div>
+            </div>
+          </fieldset>
+
+          <div class="fila-botones">
+            <button type="submit" class="boton boton--principal">Ver el resumen de mi revisión</button>
+            <button type="reset" class="boton">Desmarcar todo</button>
+          </div>
+        </form>
+
+        <div id="resumen-chequeo" class="panel" tabindex="-1" hidden></div>
+      </section>
+
+      <!-- ================= IDEAS ================= -->
+      <section class="seccion-docente" id="ideas" aria-labelledby="ideas-titulo" tabindex="-1">
+        <h2 id="ideas-titulo">Ideas prácticas para mejorar materiales</h2>
+        <p>Cambios chicos que ayudan a muchas personas a la vez. Cada idea muestra un ejemplo y su fuente.</p>
+
+        <div class="ideas">
+          <article class="panel idea" id="idea-lenguaje" tabindex="-1" aria-labelledby="idea-lenguaje-t">
+            <h3 id="idea-lenguaje-t">Escribí en lenguaje claro</h3>
+            <p>Una idea por oración. Verbos en voz activa. Si usás una palabra nueva, explicala la primera vez.</p>
+            <div class="antes-despues">
+              <p><strong>Antes:</strong> «La evaporación constituye el proceso mediante el cual el agua en estado líquido es transformada en vapor por acción de la energía solar».</p>
+              <p><strong>Después:</strong> «El sol calienta el agua. El agua se convierte en vapor. A esto lo llamamos evaporación».</p>
+            </div>
+            <p class="fuente-linea">Fuente: pautas de Lectura Fácil (UNE 153101 EX) y <a href="https://www.w3.org/TR/WCAG22/#reading-level">WCAG 2.2, criterio 3.1.5</a>.</p>
+          </article>
+
+          <article class="panel idea" id="idea-titulos" tabindex="-1" aria-labelledby="idea-titulos-t">
+            <h3 id="idea-titulos-t">Ordená con títulos reales</h3>
+            <p>En Word, Google Docs o LibreOffice usá los estilos «Título 1» y «Título 2», no solo letra grande o negrita. Así los lectores de pantalla pueden saltar entre partes y se puede armar un índice.</p>
+            <div class="antes-despues">
+              <p><strong>Antes:</strong> texto en negrita y tamaño 16 como título.</p>
+              <p><strong>Después:</strong> el mismo texto con el estilo «Título 2».</p>
+            </div>
+            <p class="fuente-linea">Fuente: <a href="https://www.w3.org/TR/WCAG22/#info-and-relationships">WCAG 2.2, criterio 1.3.1</a>.</p>
+          </article>
+
+          <article class="panel idea" id="idea-imagenes" tabindex="-1" aria-labelledby="idea-imagenes-t">
+            <h3 id="idea-imagenes-t">Describí las imágenes que enseñan algo</h3>
+            <p>Escribí lo que la imagen aporta a la clase, no todo lo que se ve. Si la imagen es solo decoración, indicá que es decorativa.</p>
+            <div class="antes-despues">
+              <p><strong>Antes:</strong> «imagen1.jpg».</p>
+              <p><strong>Después:</strong> «Mapa de Formosa: el río Paraguay marca el límite este de la provincia».</p>
+            </div>
+            <p class="fuente-linea">Fuente: <a href="https://www.w3.org/TR/WCAG22/#non-text-content">WCAG 2.2, criterio 1.1.1</a>.</p>
+          </article>
+
+          <article class="panel idea" id="idea-color" tabindex="-1" aria-labelledby="idea-color-t">
+            <h3 id="idea-color-t">No dependas solo del color</h3>
+            <p>Sumá una palabra, un símbolo o un subrayado a lo que marcás con color. Elegí letra oscura sobre fondo claro, o al revés.</p>
+            <div class="antes-despues">
+              <p><strong>Antes:</strong> «Las respuestas correctas están en verde».</p>
+              <p><strong>Después:</strong> «Las respuestas correctas tienen un ✓ y están en verde».</p>
+            </div>
+            <p class="fuente-linea">Fuente: <a href="https://www.w3.org/TR/WCAG22/#use-of-color">WCAG 2.2, criterios 1.4.1</a> y 1.4.3.</p>
+          </article>
+
+          <article class="panel idea" id="idea-archivos" tabindex="-1" aria-labelledby="idea-archivos-t">
+            <h3 id="idea-archivos-t">Compartí archivos con texto real</h3>
+            <p>Exportá a PDF desde el procesador de texto en lugar de escanear. Si solo tenés una fotocopia, pasala a texto con <a href="material.html">Acceder a mi material</a>, corregila y compartí el texto.</p>
+            <div class="antes-despues">
+              <p><strong>Antes:</strong> PDF hecho con fotos del libro.</p>
+              <p><strong>Después:</strong> PDF exportado desde el documento, con texto seleccionable.</p>
+            </div>
+            <p class="fuente-linea">Fuente: <a href="https://www.w3.org/TR/WCAG22/#images-of-text">WCAG 2.2, criterio 1.4.5</a>.</p>
+          </article>
+
+          <article class="panel idea" id="idea-formatos" tabindex="-1" aria-labelledby="idea-formatos-t">
+            <h3 id="idea-formatos-t">Ofrecé más de un camino</h3>
+            <p>Presentá el mismo contenido de dos o tres formas y aceptá distintas formas de respuesta. Planificarlo desde el inicio evita tener que adaptar después.</p>
+            <div class="antes-despues">
+              <p><strong>Antes:</strong> solo un texto para leer y un cuestionario escrito.</p>
+              <p><strong>Después:</strong> texto, un esquema con imágenes y la opción de responder oralmente o con un dibujo.</p>
+            </div>
+            <p class="fuente-linea">Fuente: <a href="https://udlguidelines.cast.org/">Pautas del Diseño Universal para el Aprendizaje, CAST</a>.</p>
+          </article>
+
+          <article class="panel idea" id="idea-consignas" tabindex="-1" aria-labelledby="idea-consignas-t">
+            <h3 id="idea-consignas-t">Consignas de a un paso</h3>
+            <p>Numerá las acciones y poné una sola por renglón. Empezá cada paso con el verbo.</p>
+            <div class="antes-despues">
+              <p><strong>Antes:</strong> «Leé el texto y luego subrayá las ideas principales para después responder las preguntas».</p>
+              <p><strong>Después:</strong> «1. Leé el texto. 2. Subrayá las ideas principales. 3. Respondé las preguntas».</p>
+            </div>
+            <p class="fuente-linea">Fuente: pautas de Lectura Fácil (UNE 153101 EX).</p>
+          </article>
+
+          <article class="panel idea" id="idea-video" tabindex="-1" aria-labelledby="idea-video-t">
+            <h3 id="idea-video-t">Subtítulos y transcripciones</h3>
+            <p>Revisá los subtítulos automáticos antes de compartir un video. Para un audio, sumá el texto de lo que se dice.</p>
+            <div class="antes-despues">
+              <p><strong>Antes:</strong> audio de WhatsApp con la consigna.</p>
+              <p><strong>Después:</strong> el mismo audio y la consigna escrita debajo.</p>
+            </div>
+            <p class="fuente-linea">Fuente: <a href="https://www.w3.org/TR/WCAG22/#captions-prerecorded">WCAG 2.2, criterios 1.2.1 y 1.2.2</a>.</p>
+          </article>
+
+          <article class="panel idea" id="idea-pictos" tabindex="-1" aria-labelledby="idea-pictos-t">
+            <h3 id="idea-pictos-t">Pictogramas que acompañan, no reemplazan</h3>
+            <p>Los pictogramas ayudan a anticipar y recordar, pero el texto tiene que seguir estando. Usá siempre la misma imagen para la misma palabra y respetá la licencia de uso.</p>
+            <div class="antes-despues">
+              <p><strong>Antes:</strong> una hoja solo con pictogramas.</p>
+              <p><strong>Después:</strong> cada pictograma con su palabra escrita debajo.</p>
+            </div>
+            <p class="fuente-linea">Fuente: <a href="https://arasaac.org/terms-of-use">condiciones de uso de ARASAAC</a> (licencia CC BY-NC-SA).</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= REVISOR ================= -->
+      <section class="seccion-docente" id="revisor" aria-labelledby="revisor-titulo" tabindex="-1">
+        <h2 id="revisor-titulo">Revisar un texto</h2>
+        <p>Pegá una consigna o un texto de tu material. La revisión se hace en tu navegador y marca puntos para mirar con atención. Es orientativa: vos decidís qué cambiar.</p>
+        <div class="panel">
+          <label class="etiqueta" for="texto-revisar">Texto para revisar</label>
+          <textarea id="texto-revisar" rows="8" aria-describedby="error-texto-revisar"></textarea>
+          <p class="error-campo" id="error-texto-revisar" hidden></p>
+          <div class="fila-botones">
+            <button type="button" class="boton boton--principal" id="revisar">Revisar el texto</button>
+          </div>
+          <div id="resultado-revisor" class="resultado-revisor" tabindex="-1" hidden></div>
+          <p class="fuente-linea">Criterios usados: oraciones de más de 25 palabras, párrafos de más de 80 palabras, palabras en mayúsculas sostenidas, siglas sin explicar y referencias solo al color. Fuente: pautas de Lectura Fácil (UNE 153101 EX) y WCAG 2.2, criterios 1.4.1 y 3.1.4.</p>
+        </div>
+      </section>
+
+      <!-- ================= NORMATIVA ================= -->
+      <section class="seccion-docente" id="normativa" aria-labelledby="normativa-titulo" tabindex="-1">
+        <h2 id="normativa-titulo">Normativa provincial y nacional</h2>
+        <p>Resúmenes breves para ubicar cada norma. Siempre consultá el texto oficial: los enlaces llevan a sitios del Estado cuando están disponibles.</p>
+
+        <article class="destacada" aria-labelledby="r2481-titulo">
+          <p class="etiqueta-ambito">Norma provincial destacada</p>
+          <h3 id="r2481-titulo">Resolución N.º 2481/24: Marco de orientaciones para la inclusión de estudiantes con discapacidad (temporal o permanente) en el sistema educativo provincial</h3>
+          <dl class="ficha">
+            <dt>Organismo</dt>
+            <dd>Ministerio de Cultura y Educación de la Provincia de Formosa.</dd>
+            <dt>Fecha</dt>
+            <dd>6 de junio de 2024.</dd>
+            <dt>Impulsada por</dt>
+            <dd>Departamento de la Modalidad de Educación Especial, en articulación con los niveles educativos.</dd>
+            <dt>Qué establece</dt>
+            <dd>Aprueba un marco de orientaciones para que estudiantes con discapacidad, temporal o permanente, cursen la escolaridad obligatoria en las escuelas de su comunidad y en igualdad de condiciones. Promueve los Proyectos Pedagógicos para la Inclusión (PPI) y las configuraciones de apoyo. Deroga la Resolución 5200/10.</dd>
+            <dt>Normas que cita</dt>
+            <dd>Constitución Nacional, Convención sobre los Derechos de las Personas con Discapacidad, Ley de Educación Nacional 26.206, Ley General de Educación Provincial 1613 y Resolución CFE 311/16.</dd>
+            <dt>Relación con los materiales</dt>
+            <dd>Los materiales accesibles son parte de las configuraciones de apoyo que una escuela puede preparar para sostener la trayectoria de cada estudiante.</dd>
+          </dl>
+          <div class="fila-botones">
+            <a class="boton boton--principal" href="https://archivos.formosa.gob.ar/media/uploads/documentos/documento_1720711093.pdf">Leer la Resolución 2481/24 (PDF oficial, gobierno de Formosa)</a>
+          </div>
+          <p class="fuente-linea">Resumen preparado con el encabezado de la resolución y publicaciones de difusión docente. Para aplicarla, leé el documento completo. Si el PDF es una imagen escaneada, podés pasarlo a texto con <a href="material.html">Acceder a mi material</a>.</p>
+        </article>
+
+        <h3>Buscar en la normativa</h3>
+        <div class="filtros" role="search" aria-label="Normativa">
+          <div>
+            <label class="etiqueta" for="buscar-norma">Número o tema</label>
+            <input type="search" id="buscar-norma" aria-describedby="ayuda-buscar-norma">
+            <p class="ayuda" id="ayuda-buscar-norma">Por ejemplo: 26.206, web, discapacidad.</p>
+          </div>
+          <div>
+            <label class="etiqueta" for="ambito-norma">Ámbito</label>
+            <select id="ambito-norma">
+              <option value="todas">Todos</option>
+              <option value="provincial">Provincial</option>
+              <option value="nacional">Nacional</option>
+              <option value="internacional">Internacional y técnica</option>
+            </select>
+          </div>
+        </div>
+        <p class="estado-modo" id="conteo-normas" role="status" aria-live="polite">Se muestran 10 normas.</p>
+
+        <ul class="lista-normas" id="lista-normas">
+          <li class="panel norma" data-ambito="provincial" data-texto="2481 2481/24 resolución inclusión discapacidad ppi proyectos pedagógicos formosa especial">
+            <p class="etiqueta-ambito">Provincial</p>
+            <h3>Resolución 2481/24 (Formosa)</h3>
+            <p>Marco de orientaciones para la inclusión de estudiantes con discapacidad, temporal o permanente. Detalle en el recuadro destacado de arriba.</p>
+            <p class="fuente-linea">Fuente: <a href="https://archivos.formosa.gob.ar/media/uploads/documentos/documento_1720711093.pdf">documento oficial en archivos.formosa.gob.ar</a>.</p>
+          </li>
+          <li class="panel norma" data-ambito="provincial" data-texto="1613 ley general de educación provincial formosa">
+            <p class="etiqueta-ambito">Provincial</p>
+            <h3>Ley General de Educación Provincial N.º 1613 (Formosa)</h3>
+            <p>Ley marco del sistema educativo de Formosa. La Resolución 2481/24 la cita como uno de sus fundamentos.</p>
+            <p class="fuente-linea">Fuente: citada en la Resolución 2481/24. No encontramos un enlace oficial estable al texto completo; consultalo en el Boletín Oficial de Formosa o con tu supervisión.</p>
+          </li>
+          <li class="panel norma" data-ambito="nacional" data-texto="26206 26.206 ley de educación nacional educación especial modalidad inclusión">
+            <p class="etiqueta-ambito">Nacional</p>
+            <h3>Ley de Educación Nacional N.º 26.206 (2006)</h3>
+            <p>Organiza el sistema educativo argentino. Define la Educación Especial como una modalidad que atraviesa todos los niveles y busca asegurar el derecho a la educación de las personas con discapacidad.</p>
+            <p class="fuente-linea">Fuente: <a href="https://www.argentina.gob.ar/normativa/nacional/ley-26206-123542/actualizacion">texto actualizado en argentina.gob.ar</a>.</p>
+          </li>
+          <li class="panel norma" data-ambito="nacional" data-texto="311 311/16 cfe consejo federal promoción acreditación certificación titulación discapacidad ppi">
+            <p class="etiqueta-ambito">Nacional</p>
+            <h3>Resolución CFE N.º 311/16</h3>
+            <p>Del Consejo Federal de Educación. Da las bases para la promoción, acreditación, certificación y titulación de estudiantes con discapacidad, e incluye el Proyecto Pedagógico para la Inclusión.</p>
+            <p class="fuente-linea">Fuente: <a href="https://www.bnm.me.gov.ar/giga1/normas/RCFE_311-16.pdf">PDF en la Biblioteca Nacional de Maestros</a>. Si el enlace cambió, buscala como «Resolución CFE 311/16» en argentina.gob.ar.</p>
+          </li>
+          <li class="panel norma" data-ambito="nacional" data-texto="26378 26.378 convención derechos personas con discapacidad aprobación">
+            <p class="etiqueta-ambito">Nacional</p>
+            <h3>Ley N.º 26.378 (2008)</h3>
+            <p>Aprueba la Convención sobre los Derechos de las Personas con Discapacidad y su Protocolo Facultativo.</p>
+            <p class="fuente-linea">Fuente: <a href="https://www.argentina.gob.ar/normativa/nacional/ley-26378-141317/texto">texto en argentina.gob.ar</a>.</p>
+          </li>
+          <li class="panel norma" data-ambito="nacional" data-texto="27044 27.044 jerarquía constitucional convención discapacidad">
+            <p class="etiqueta-ambito">Nacional</p>
+            <h3>Ley N.º 27.044 (2014)</h3>
+            <p>Otorga jerarquía constitucional a la Convención sobre los Derechos de las Personas con Discapacidad, en los términos del artículo 75, inciso 22, de la Constitución Nacional.</p>
+            <p class="fuente-linea">Fuente: <a href="https://www.argentina.gob.ar/normativa/nacional/ley-27044-239860/texto">texto en argentina.gob.ar</a>.</p>
+          </li>
+          <li class="panel norma" data-ambito="nacional" data-texto="27710 27.710 lengua de señas argentina lsa sordos sordas hipoacusia comunicación">
+            <p class="etiqueta-ambito">Nacional</p>
+            <h3>Ley N.º 27.710 de Lengua de Señas Argentina (2023)</h3>
+            <p>Reconoce la Lengua de Señas Argentina (LSA) como lengua natural y originaria de las personas sordas y promueve eliminar las barreras comunicacionales.</p>
+            <p class="fuente-linea">Fuente: <a href="https://www.argentina.gob.ar/normativa/nacional/norma-383041/texto">texto en argentina.gob.ar</a>.</p>
+          </li>
+          <li class="panel norma" data-ambito="nacional" data-texto="26653 26.653 accesibilidad web páginas información decreto 656 2019">
+            <p class="etiqueta-ambito">Nacional</p>
+            <h3>Ley N.º 26.653 de Accesibilidad de la Información en las Páginas Web (2010)</h3>
+            <p>Obliga al Estado nacional y a otros organismos a respetar normas de accesibilidad en sus sitios web. Está reglamentada por el Decreto 656/2019, que invita a las provincias a adherir.</p>
+            <p class="fuente-linea">Fuente: <a href="https://www.argentina.gob.ar/normativa/nacional/175694/texto">Ley 26.653</a> y <a href="https://www.argentina.gob.ar/normativa/nacional/decreto-656-2019-328722/texto">Decreto 656/2019</a> en argentina.gob.ar.</p>
+          </li>
+          <li class="panel norma" data-ambito="internacional" data-texto="convención onu derechos personas con discapacidad artículo 24 educación artículo 9 accesibilidad">
+            <p class="etiqueta-ambito">Internacional</p>
+            <h3>Convención sobre los Derechos de las Personas con Discapacidad (ONU, 2006)</h3>
+            <p>Con jerarquía constitucional en Argentina. El artículo 9 trata la accesibilidad, incluida la de la información y las comunicaciones. El artículo 24 reconoce el derecho a una educación inclusiva.</p>
+            <p class="fuente-linea">Fuente: texto aprobado por la <a href="https://www.argentina.gob.ar/normativa/nacional/ley-26378-141317/texto">Ley 26.378</a>.</p>
+          </li>
+          <li class="panel norma" data-ambito="internacional" data-texto="wcag 2.2 w3c pautas accesibilidad contenido web técnica">
+            <p class="etiqueta-ambito">Referencia técnica</p>
+            <h3>Pautas de Accesibilidad para el Contenido Web (WCAG) 2.2, W3C (2023)</h3>
+            <p>Estándar internacional con criterios comprobables para páginas y documentos digitales. No es una ley, pero es la referencia que usan los organismos de aplicación.</p>
+            <p class="fuente-linea">Fuente: <a href="https://www.w3.org/TR/WCAG22/">W3C, WCAG 2.2</a> (en inglés).</p>
+          </li>
+        </ul>
+        <p class="fuente-linea">Enlaces revisados en septiembre de 2026. Si alguno dejó de funcionar, buscá la norma por su número en <a href="https://www.argentina.gob.ar/normativa">argentina.gob.ar/normativa</a>.</p>
+      </section>
+    </div>
+  </main>
+  <footer class="pie">
+    <div class="contenedor">
+      <p><strong>Bermejo Accesible</strong> («La información a tu manera») es un proyecto de código abierto creado para una hackatón en Formosa. Funciona en el navegador: no pide cuentas y no guarda tus materiales.</p>
+      <p>Los pictogramas que se muestran en «Texto con pictogramas» son de Sergio Palao. Origen: <a href="https://arasaac.org">ARASAAC</a>. Licencia: Creative Commons BY-NC-SA. Propiedad: Gobierno de Aragón (España).</p>
+      <p>Extracción de texto con <a href="https://tesseract.projectnaptha.com/">Tesseract.js</a> y <a href="https://mozilla.github.io/pdf.js/">PDF.js</a>. Tipografía <a href="https://www.brailleinstitute.org/freefont/">Atkinson Hyperlegible</a>, creada por Braille Institute. La letra en imprenta mayúscula usa «Bermejo Mayúscula», una adaptación de DejaVu Sans (licencia Bitstream Vera).</p>
+    </div>
+  </footer>
+
+</body>
+</html>

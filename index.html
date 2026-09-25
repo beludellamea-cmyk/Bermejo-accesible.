@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bermejo Accesible: la información a tu manera</title>
+  <meta name="description" content="Convertí tu material en un texto accesible: letra ajustable, alto contraste, lectura en voz alta, partes, imágenes y pictogramas. Con un espacio para docentes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;display=swap">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/preferencias.js"></script>
+  <script src="js/asistente-global.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="index.html">
+        <svg class="marca__logo" viewBox="0 0 64 52" width="64" height="52" aria-hidden="true" focusable="false">
+          <path class="logo__pagina" d="M32 13 C25 7 13 6 4 9 V44 C13 41 25 42 32 48 Z"/>
+          <path class="logo__pagina" d="M32 13 C39 7 51 6 60 9 V44 C51 41 39 42 32 48 Z"/>
+          <path class="logo__rio" d="M9 35 C15 35 16 25 22 25 C28 25 28 36 34 36 C40 36 41 22 47 22 C51 22 53 26 55 27"/>
+        </svg>
+        <span class="marca__textos">
+          <span class="marca__nombre">Bermejo <span class="marca__acento">Accesible</span></span>
+          <span class="marca__lema">La información a tu manera</span>
+        </span>
+      </a>
+      <nav class="nav-principal" aria-label="Principal">
+        <ul>
+          <li><a href="index.html" aria-current="page">Inicio</a></li>
+          <li><a href="material.html">Acceder a mi material</a></li>
+          <li><a href="docente.html">Espacio docente</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="ajustes" role="region" aria-labelledby="ajustes-titulo">
+      <div class="contenedor ajustes__fila">
+        <p class="ajustes__titulo" id="ajustes-titulo">Ajustes de lectura</p>
+        <div class="ajustes__grupo" role="group" aria-labelledby="letra-etiqueta">
+          <span class="ajustes__etiqueta" id="letra-etiqueta">Letra:</span>
+          <button type="button" class="boton boton--letra-mayuscula" data-letra-opcion="mayuscula" aria-pressed="true">Imprenta mayúscula</button>
+          <span class="ajustes__barra" aria-hidden="true">/</span>
+          <button type="button" class="boton boton--letra-habitual" data-letra-opcion="habitual" aria-pressed="false">Texto habitual</button>
+        </div>
+        <div class="ajustes__grupo" role="group" aria-labelledby="tam-etiqueta">
+          <span class="ajustes__etiqueta" id="tam-etiqueta">Tamaño del texto:</span>
+          <button type="button" class="boton" data-ajuste="achicar">Más chico</button>
+          <span class="ajustes__valor" id="tam-valor">100 %</span>
+          <button type="button" class="boton" data-ajuste="agrandar">Más grande</button>
+        </div>
+        <div class="ajustes__grupo" role="group" aria-labelledby="con-etiqueta">
+          <span class="ajustes__etiqueta" id="con-etiqueta">Contraste:</span>
+          <button type="button" class="boton" data-contraste-opcion="normal" aria-pressed="true">Normal</button>
+          <button type="button" class="boton" data-contraste-opcion="alto" aria-pressed="false">Alto</button>
+        </div>
+        <button type="button" class="boton" data-ajuste="restablecer">Restablecer ajustes</button>
+        <p class="visualmente-oculto" id="ajustes-anuncio" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1" class="portada">
+    <div class="contenedor">
+      <h1>Tu material, en la forma en que mejor leés.</h1>
+      <p class="intro">Pegá un texto, subí un PDF o una foto, o cargá un video con subtítulos o transcripción. Bermejo Accesible te deja revisar el texto y mostrarlo como lo necesites: con letra más grande, en voz alta, por partes, con imágenes o con pictogramas.</p>
+
+      <ul class="caminos">
+        <li>
+          <section class="camino" aria-labelledby="camino-material">
+            <h2 id="camino-material"><a href="material.html">Acceder a mi material</a></h2>
+            <p>Para estudiantes y cualquier persona que necesite leer un texto de otra forma.</p>
+            <ul>
+              <li>Pegá texto, subí un PDF, una foto o un video con su transcripción.</li>
+              <li>Corregí lo que salió mal.</li>
+              <li>Elegí cómo leerlo.</li>
+              <li>Probá el cuaderno de Sociales de Formosa.</li>
+            </ul>
+            <p class="camino__muestra" aria-hidden="true"><span>Aa</span><span>Aa</span><span>Aa</span></p>
+          </section>
+        </li>
+        <li>
+          <section class="camino camino--docente" aria-labelledby="camino-docente">
+            <h2 id="camino-docente"><a href="docente.html">Espacio docente</a></h2>
+            <p>Para preparar materiales que todo el curso pueda usar.</p>
+            <ul>
+              <li>Guía para detectar barreras.</li>
+              <li>Ideas prácticas con ejemplos.</li>
+              <li>«Contame qué pasa en tu aula»: orientaciones por situación.</li>
+              <li>Normativa provincial y nacional, con la Resolución 2481/24.</li>
+            </ul>
+            <p class="camino__muestra camino__muestra--numero" aria-hidden="true">2481/24</p>
+          </section>
+        </li>
+      </ul>
+
+
+      <section class="lector-ayuda" aria-labelledby="lector-titulo">
+        <h2 id="lector-titulo">¿Usás un lector de pantalla?</h2>
+        <p>Podés usar el lector que ya trae tu dispositivo. No hace falta instalar nada ni activarlo desde esta web.</p>
+        <ul>
+          <li><strong>Computadora con Windows:</strong> Narrador viene incluido y se activa con la tecla de Windows + Ctrl + Enter. También funciona con NVDA, que es gratuito.</li>
+          <li><strong>Celular Android:</strong> TalkBack, en Ajustes › Accesibilidad.</li>
+          <li><strong>iPhone:</strong> VoiceOver, en Ajustes › Accesibilidad.</li>
+        </ul>
+        <p>Cada página empieza con el enlace «Ir al contenido» y está ordenada con títulos. Con NVDA o Narrador, la tecla H salta de título en título; con TalkBack o VoiceOver, elegí «Encabezados» en el menú de lectura o en el rotor.</p>
+        <p>La opción «Imprenta mayúscula» solo cambia cómo se ven las letras: tu lector recibe el texto tal como está escrito. La «Lectura en voz alta» de Acceder a mi material es para quien no usa lector de pantalla; si ya usás uno, leé el texto directamente con él.</p>
+      </section>
+
+      <section aria-labelledby="formas-titulo">
+        <h2 id="formas-titulo">Seis formas de leer el mismo texto</h2>
+        <ul class="formas">
+          <li><h3>Lectura ajustable</h3><p>Cambiá el tamaño de la letra, el espacio entre líneas, letras y palabras.</p></li>
+          <li><h3>Alto contraste</h3><p>Elegí colores de fondo y de letra que te cansen menos la vista.</p></li>
+          <li><h3>Lectura en voz alta</h3><p>Escuchá el texto cuando quieras, con botones para pausar, volver o avanzar.</p></li>
+          <li><h3>Por partes</h3><p>El texto dividido en partes cortas, con un índice y marcas de lo que ya leíste.</p></li>
+          <li><h3>Texto con imágenes</h3><p>Dibujos simples junto a las ideas principales, siempre con el texto escrito.</p></li>
+          <li><h3>Texto con pictogramas</h3><p>Pictogramas de ARASAAC acompañando las palabras clave de cada parte.</p></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="como-titulo">
+        <h2 id="como-titulo">Cómo funciona</h2>
+        <ol class="pasos-lista">
+          <li><h3>Cargá tu material</h3><p>Texto pegado, archivo PDF, foto o video con subtítulos o transcripción. También podés probar con ejemplos.</p></li>
+          <li><h3>Revisá el texto</h3><p>La lectura automática puede equivocarse. Corregí lo necesario. El original sigue disponible.</p></li>
+          <li><h3>Elegí cómo leer</h3><p>Cambiá de forma cuando quieras. Tus ajustes se mantienen.</p></li>
+        </ol>
+      </section>
+
+      <section class="nota-privacidad" aria-labelledby="privacidad-titulo">
+        <h2 id="privacidad-titulo">Tus archivos se quedan en tu dispositivo</h2>
+        <p>El texto de tus fotos y PDF se lee dentro de tu navegador. Los videos y sus subtítulos también se abren en tu dispositivo. No hace falta crear una cuenta y la web no guarda tus materiales: al cerrar la pestaña, se borran.</p>
+        <p>La primera vez, el navegador descarga las herramientas de lectura (PDF.js y Tesseract.js) y el idioma español. Si elegís «Texto con pictogramas», se envían a ARASAAC solo algunas palabras sueltas para buscar cada pictograma, y te avisamos antes.</p>
+      </section>
+    </div>
+  </main>
+  <footer class="pie">
+    <div class="contenedor">
+      <p><strong>Bermejo Accesible</strong> («La información a tu manera») es un proyecto de código abierto creado para una hackatón en Formosa. Funciona en el navegador: no pide cuentas y no guarda tus materiales.</p>
+      <p>Los pictogramas que se muestran en «Texto con pictogramas» son de Sergio Palao. Origen: <a href="https://arasaac.org">ARASAAC</a>. Licencia: Creative Commons BY-NC-SA. Propiedad: Gobierno de Aragón (España).</p>
+      <p>Extracción de texto con <a href="https://tesseract.projectnaptha.com/">Tesseract.js</a> y <a href="https://mozilla.github.io/pdf.js/">PDF.js</a>. Tipografía <a href="https://www.brailleinstitute.org/freefont/">Atkinson Hyperlegible</a>, creada por Braille Institute. La letra en imprenta mayúscula usa «Bermejo Mayúscula», una adaptación de DejaVu Sans (licencia Bitstream Vera).</p>
+    </div>
+  </footer>
+
+</body>
+</html>

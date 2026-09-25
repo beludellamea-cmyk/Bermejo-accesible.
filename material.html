@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acceder a mi material | Bermejo Accesible</title>
+  <meta name="description" content="Pegá texto, subí un PDF o foto, o usá un video con subtítulos. Revisá el texto y leelo con letra ajustable, voz, partes, imágenes o pictogramas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;display=swap">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/preferencias.js"></script>
+  <script src="js/asistente-global.js" defer></script>
+  <script src="js/ilustraciones.js" defer></script>
+  <script src="js/material.js" defer></script>
+  <script src="js/descargar-material.js" defer></script>
+  <script src="js/video.js" defer></script>
+  <script src="js/youtube.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="index.html">
+        <svg class="marca__logo" viewBox="0 0 64 52" width="64" height="52" aria-hidden="true" focusable="false">
+          <path class="logo__pagina" d="M32 13 C25 7 13 6 4 9 V44 C13 41 25 42 32 48 Z"/>
+          <path class="logo__pagina" d="M32 13 C39 7 51 6 60 9 V44 C51 41 39 42 32 48 Z"/>
+          <path class="logo__rio" d="M9 35 C15 35 16 25 22 25 C28 25 28 36 34 36 C40 36 41 22 47 22 C51 22 53 26 55 27"/>
+        </svg>
+        <span class="marca__textos">
+          <span class="marca__nombre">Bermejo <span class="marca__acento">Accesible</span></span>
+          <span class="marca__lema">La información a tu manera</span>
+        </span>
+      </a>
+      <nav class="nav-principal" aria-label="Principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="material.html" aria-current="page">Acceder a mi material</a></li>
+          <li><a href="docente.html">Espacio docente</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="ajustes" role="region" aria-labelledby="ajustes-titulo">
+      <div class="contenedor ajustes__fila">
+        <p class="ajustes__titulo" id="ajustes-titulo">Ajustes de lectura</p>
+        <div class="ajustes__grupo" role="group" aria-labelledby="letra-etiqueta">
+          <span class="ajustes__etiqueta" id="letra-etiqueta">Letra:</span>
+          <button type="button" class="boton boton--letra-mayuscula" data-letra-opcion="mayuscula" aria-pressed="true">Imprenta mayúscula</button>
+          <span class="ajustes__barra" aria-hidden="true">/</span>
+          <button type="button" class="boton boton--letra-habitual" data-letra-opcion="habitual" aria-pressed="false">Texto habitual</button>
+        </div>
+        <div class="ajustes__grupo" role="group" aria-labelledby="tam-etiqueta">
+          <span class="ajustes__etiqueta" id="tam-etiqueta">Tamaño del texto:</span>
+          <button type="button" class="boton" data-ajuste="achicar">Más chico</button>
+          <span class="ajustes__valor" id="tam-valor">100 %</span>
+          <button type="button" class="boton" data-ajuste="agrandar">Más grande</button>
+        </div>
+        <div class="ajustes__grupo" role="group" aria-labelledby="con-etiqueta">
+          <span class="ajustes__etiqueta" id="con-etiqueta">Contraste:</span>
+          <button type="button" class="boton" data-contraste-opcion="normal" aria-pressed="true">Normal</button>
+          <button type="button" class="boton" data-contraste-opcion="alto" aria-pressed="false">Alto</button>
+        </div>
+        <button type="button" class="boton" data-ajuste="restablecer">Restablecer ajustes</button>
+        <p class="visualmente-oculto" id="ajustes-anuncio" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <div class="contenedor">
+      <h1>Acceder a mi material</h1>
+      <p class="intro">En tres pasos: cargás tu material, revisás el texto y elegís cómo leerlo. Los textos se procesan en este dispositivo; si abrís YouTube, se carga su reproductor externo.</p>
+
+      <ol class="indicador" aria-label="Pasos">
+        <li id="ind-1" aria-current="step">Cargar</li>
+        <li id="ind-2">Revisar</li>
+        <li id="ind-3">Leer</li>
+      </ol>
+
+      <p class="visualmente-oculto" id="anuncio" role="status" aria-live="polite"></p>
+
+      <div id="errores" class="errores" tabindex="-1" hidden></div>
+
+      <noscript>
+        <div class="aviso"><p><strong>Esta parte necesita JavaScript.</strong> Activalo en tu navegador para leer tus materiales. El espacio docente funciona sin JavaScript.</p></div>
+      </noscript>
+
+      <section class="panel video-vista" id="video-vista" aria-labelledby="t-video-vista" hidden>
+        <h2 id="t-video-vista">Video original</h2>
+        <video id="video-reproductor" controls playsinline preload="metadata" aria-label="Video original con subtítulos cuando están disponibles"></video>
+        <p class="ayuda">El video queda en tu dispositivo. Las opciones de lectura trabajan con la transcripción; la descarga adaptada contiene el texto, no el archivo de video.</p>
+      </section>
+      <section class="panel video-vista" id="youtube-vista" aria-labelledby="t-youtube-vista" hidden>
+        <h2 id="t-youtube-vista">Video de YouTube</h2>
+        <div class="youtube-marco" id="youtube-marco"></div>
+        <p class="ayuda">El reproductor necesita internet. Para adaptar lo que se dice, se usa la transcripción que pegaste; el enlace por sí solo no entrega el texto.</p>
+      </section>
+
+      <!-- ================= PASO 1 ================= -->
+      <section class="paso" id="paso-cargar" aria-labelledby="t-cargar">
+        <h2 id="t-cargar" tabindex="-1">Paso 1. Cargá tu material</h2>
+        <p>Elegí cómo cargar tu material. Si tenés dudas, empezá con el ejemplo.</p>
+
+        <div class="opciones-carga">
+          <section class="panel" aria-labelledby="t-pegar">
+            <h3 id="t-pegar">Pegar texto</h3>
+            <label class="etiqueta" for="texto-pegado">Texto de tu material</label>
+            <p class="ayuda" id="ayuda-pegado">Copiá el texto de otro lugar y pegalo acá. También podés escribirlo.</p>
+            <textarea id="texto-pegado" rows="7" aria-describedby="ayuda-pegado"></textarea>
+            <p class="error-campo" id="error-texto-pegado" hidden></p>
+            <button type="button" class="boton boton--principal" id="usar-texto">Usar este texto</button>
+          </section>
+
+          <section class="panel" aria-labelledby="t-pdf">
+            <h3 id="t-pdf">Subir un PDF</h3>
+            <label class="etiqueta" for="archivo-pdf">Archivo PDF</label>
+            <p class="ayuda" id="ayuda-pdf">Si el PDF es un escaneo, se leen las imágenes de cada página. Puede tardar un poco.</p>
+            <input type="file" id="archivo-pdf" accept="application/pdf,.pdf" aria-describedby="ayuda-pdf">
+            <p class="error-campo" id="error-archivo-pdf" hidden></p>
+            <button type="button" class="boton boton--principal" id="leer-pdf">Leer el PDF</button>
+          </section>
+
+          <section class="panel" aria-labelledby="t-foto">
+            <h3 id="t-foto">Foto de tu material</h3>
+            <p class="ayuda" id="ayuda-foto">Consejos: buena luz, la hoja derecha y completa, sin sombras. Funciona mejor con letra impresa que con letra a mano.</p>
+            <label class="etiqueta" for="archivo-foto">Subir una foto guardada</label>
+            <input type="file" id="archivo-foto" accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" aria-describedby="ayuda-foto">
+            <p class="separador-o">o</p>
+            <label class="etiqueta" for="camara-foto">Sacar una foto con la cámara</label>
+            <input type="file" id="camara-foto" accept="image/*" capture="environment" aria-describedby="ayuda-foto">
+            <p class="error-campo" id="error-archivo-foto" hidden></p>
+            <button type="button" class="boton boton--principal" id="leer-foto">Leer la foto</button>
+          </section>
+        </div>
+
+        <section class="panel video-carga" aria-labelledby="t-youtube-carga">
+          <h3 id="t-youtube-carga">Video de YouTube con transcripción</h3>
+          <p>Pegá el enlace y la transcripción del video. Si en YouTube aparece «Mostrar transcripción», podés copiarla y corregirla aquí. Esta página no obtiene los subtítulos automáticamente.</p>
+          <label class="etiqueta" for="youtube-url">Enlace del video de YouTube</label>
+          <input type="url" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." inputmode="url" aria-describedby="youtube-ayuda">
+          <label class="etiqueta" for="youtube-texto">Transcripción del video</label>
+          <textarea id="youtube-texto" rows="7" placeholder="Pegá acá lo que se dice en el video" aria-describedby="youtube-ayuda"></textarea>
+          <label class="etiqueta" for="youtube-descripcion">Descripción de imágenes importantes (opcional)</label>
+          <textarea id="youtube-descripcion" rows="3" placeholder="Por ejemplo: aparece un mapa que muestra Formosa"></textarea>
+          <p class="ayuda" id="youtube-ayuda">Los subtítulos visibles en YouTube no se copian solos. Revisá palabras, nombres y datos antes de continuar.</p>
+          <p class="error-campo" id="youtube-error" role="alert" tabindex="-1" hidden></p>
+          <button type="button" class="boton boton--principal" id="youtube-usar">Ver video y adaptar transcripción</button>
+        </section>
+
+        <section class="panel video-carga" aria-labelledby="t-video-carga">
+          <h3 id="t-video-carga">Video con transcripción o subtítulos</h3>
+          <p>Elegí un video de tu dispositivo. Para adaptar lo que dice, agregá sus subtítulos (.srt o .vtt) o pegá una transcripción. Si las imágenes muestran algo importante que no se dice, podés describirlo.</p>
+          <label class="etiqueta" for="archivo-video">Video (MP4 o WebM)</label>
+          <input type="file" id="archivo-video" accept="video/mp4,video/webm,.mp4,.webm">
+          <label class="etiqueta" for="archivo-subtitulos">Subtítulos o transcripción (.srt, .vtt o .txt)</label>
+          <input type="file" id="archivo-subtitulos" accept=".srt,.vtt,.txt,text/plain,text/vtt">
+          <label class="etiqueta" for="video-transcripcion">O pegá la transcripción</label>
+          <textarea id="video-transcripcion" rows="5" placeholder="Escribí aquí lo que se dice en el video"></textarea>
+          <label class="etiqueta" for="video-descripcion">Descripción de imágenes importantes (opcional)</label>
+          <textarea id="video-descripcion" rows="3" placeholder="Por ejemplo: aparece un mapa que señala El Colorado"></textarea>
+          <p class="error-campo" id="video-error" role="alert" tabindex="-1" hidden></p>
+          <button type="button" class="boton boton--principal" id="video-usar">Usar video y revisar texto</button>
+          <p class="ayuda">La página no genera subtítulos automáticamente. Si no tenés una transcripción, podés mirar el video, pero hace falta escribir o conseguir el texto para adaptarlo.</p>
+          <p>Para probar, descargá el <a href="ejemplos/ciclo-del-agua-video.mp4" download>video de ejemplo (MP4)</a> y sus <a href="ejemplos/ciclo-del-agua-video.vtt" download>subtítulos (VTT)</a>. Después cargá los dos archivos arriba.</p>
+        </section>
+
+        <section class="panel" aria-labelledby="t-ejemplo">
+          <h3 id="t-ejemplo">Probar con un ejemplo</h3>
+          <p>El ejemplo «El ciclo del agua» sirve para probar las seis formas de lectura, incluidas las imágenes y los pictogramas.</p>
+          <div class="fila-botones">
+            <button type="button" class="boton boton--principal" id="usar-ejemplo">Cargar el texto de ejemplo</button>
+          </div>
+          <p>Para probar la lectura de archivos, descargá el <a href="ejemplos/ciclo-del-agua.pdf" download>PDF de ejemplo (1 página, <span class="literal">ciclo-del-agua.pdf</span>)</a> o la <a href="ejemplos/ciclo-del-agua-foto.png" download>foto de ejemplo (<span class="literal">ciclo-del-agua-foto.png</span>)</a> y después subilos arriba.</p>
+        </section>
+
+        <section class="panel" aria-labelledby="t-ejemplo-sociales">
+          <h3 id="t-ejemplo-sociales">Demostración: un cuaderno de Sociales de Formosa</h3>
+          <p>Ejemplo didáctico original sobre El Colorado y el río Bermejo. No es una página de un cuaderno oficial ni de un estudiante real. Sirve para mostrar cómo un mismo contenido puede leerse de varias maneras.</p>
+          <button type="button" class="boton boton--principal" id="usar-sociales">Probar el ejemplo de Sociales</button>
+          <p>Si querés demostrar la lectura de una página en imagen, descargá la <a href="ejemplos/sociales-bermejo-cuaderno.png" download>página de cuaderno de ejemplo (PNG)</a> y después cargala en «Foto de tu material». También está el <a href="ejemplos/sociales-bermejo.txt" download>texto de ejemplo (TXT)</a>.</p>
+          <p class="ayuda">Datos sobre El Colorado: <a href="https://m.formosa.gob.ar/noticia/10511/61/el_colorado_feriarte__">Gobierno de Formosa</a>. El texto y la imagen son una elaboración didáctica para esta demostración.</p>
+          <h4>Probá con una página real de Geografía de Formosa</h4>
+          <p>La página del material aportado por el equipo trata sobre la localización de Formosa, sus límites, departamentos y contexto histórico (módulo 1, página 6). Este PDF tiene texto seleccionable. La foto de las banderas forma parte del original; la lectura del PDF extrae texto, pero no describe esa imagen automáticamente.</p>
+          <p><a href="ejemplos/geografia-formosa-pagina-6.pdf" download>Descargar la página de Geografía (PDF, una página)</a>. Después, en «Subir un PDF», elegí ese archivo y pulsá «Leer el PDF». Revisá el texto extraído antes de elegir voz, lectura por partes u otra forma de acceso.</p>
+          <p class="ayuda">El ejemplo «El Colorado y el río Bermejo» es una actividad creada para esta demostración: su texto es distinto del libro. Revisá la vigencia de los datos del libro antes de usarlo en clase.</p>
+          <h4>Tres ilustraciones de apoyo para la demostración</h4>
+          <p>Son imágenes generadas con IA y revisadas para acompañar ideas del material: el paisaje de llanura y vegetación, un río entre orillas y el estudio de mapas y cuadernos. Son escenas ilustrativas; el mapa dibujado no reproduce la geografía exacta.</p>
+          <div class="laminas-formosa" id="laminas-formosa-demo" aria-label="Tres ilustraciones de apoyo de Formosa">
+            <figure class="lamina"><img src="img/laminas-formosa-ia.png" alt="Ilustración de una llanura con árboles y vegetación abundante, para imaginar un paisaje de la región chaqueña." class="lamina__foto lamina__foto--1" loading="lazy"><figcaption>Paisaje y vegetación</figcaption></figure>
+            <figure class="lamina"><img src="img/laminas-formosa-ia.png" alt="Ilustración de un río ancho que serpentea entre dos orillas verdes; no es una fotografía del río Bermejo." class="lamina__foto lamina__foto--2" loading="lazy"><figcaption>El río y sus orillas</figcaption></figure>
+            <figure class="lamina"><img src="img/laminas-formosa-ia.png" alt="Ilustración de unas manos que estudian un mapa y un cuaderno; el mapa es imaginario y no debe usarse para ubicar lugares." class="lamina__foto lamina__foto--3" loading="lazy"><figcaption>Estudiar el territorio</figcaption></figure>
+          </div>
+          <p class="ayuda">Contenido visual generado con IA. Las descripciones escritas ofrecen la misma idea general de cada imagen.</p>
+        </section>
+
+        <div class="progreso panel" id="progreso" hidden>
+          <p class="progreso__texto" id="progreso-texto">Preparando…</p>
+          <progress id="barra" max="100" aria-labelledby="progreso-texto"></progress>
+          <p class="ayuda">La primera vez se descargan las herramientas de lectura. Tu archivo no se envía a ningún servidor.</p>
+          <div class="fila-botones">
+            <button type="button" class="boton" id="cancelar">Cancelar</button>
+          </div>
+        </div>
+
+        <details>
+          <summary>Qué puede hacer esta web y qué no</summary>
+          <ul>
+            <li>Lee texto impreso de fotos y PDF escaneados. La letra manuscrita, las tablas, las columnas y las fórmulas suelen salir con errores: por eso siempre podés corregir el texto.</li>
+            <li>Lee hasta 40 páginas por PDF. Los PDF con contraseña no se pueden abrir.</li>
+            <li>No lee formatos de foto HEIC en la mayoría de los navegadores. Guardá la foto como JPG o PNG.</li>
+            <li>Los títulos y las partes se detectan de forma automática y pueden no coincidir con el original.</li>
+            <li>La voz depende de las voces instaladas en tu dispositivo.</li>
+            <li>«Texto con imágenes» usa una colección chica de dibujos propios. Si no hay uno que corresponda, no se muestra imagen.</li>
+            <li>«Texto con pictogramas» necesita internet y consulta el catálogo de ARASAAC.</li>
+          </ul>
+        </details>
+      </section>
+
+      <!-- ================= PASO 2 ================= -->
+      <section class="paso" id="paso-revisar" aria-labelledby="t-revisar" hidden>
+        <h2 id="t-revisar" tabindex="-1">Paso 2. Revisá y corregí el texto</h2>
+        <div id="avisos-calidad"></div>
+        <div class="revisar">
+          <div>
+            <label class="etiqueta" for="texto-editable">Texto que se va a leer</label>
+            <p class="ayuda" id="ayuda-editable">Podés corregir palabras, borrar partes o agregar lo que falte. Dejá una línea en blanco entre párrafos. Un renglón corto y sin punto final se toma como título.</p>
+            <textarea id="texto-editable" rows="16" aria-describedby="ayuda-editable"></textarea>
+            <div class="fila-botones">
+              <button type="button" class="boton" id="restaurar">Volver al texto extraído</button>
+              <button type="button" class="boton" id="descargar-txt">Descargar el texto (.txt)</button>
+            </div>
+          </div>
+          <section class="panel original" aria-labelledby="t-original">
+            <h3 id="t-original">Tu material original</h3>
+            <div id="original"></div>
+          </section>
+        </div>
+        <div class="fila-botones">
+          <button type="button" class="boton boton--principal" id="ir-a-leer">Continuar: elegir cómo leer</button>
+          <button type="button" class="boton" id="otro-material">Cargar otro material</button>
+        </div>
+      </section>
+
+      <!-- ================= PASO 3 ================= -->
+      <section class="paso" id="paso-leer" aria-labelledby="t-leer" hidden>
+        <h2 id="t-leer" tabindex="-1">Paso 3. Elegí cómo leer</h2>
+        <p>Podés cambiar de forma cuando quieras. El tamaño de letra y los colores que elijas se mantienen en todas las formas.</p>
+
+        <fieldset class="modos">
+          <legend>Forma de lectura</legend>
+          <div class="modos__opciones">
+            <label class="modo"><input type="radio" name="modo" value="lectura" checked><span><span class="modo__nombre">Lectura ajustable</span><span class="modo__desc">Letra, líneas y espacios</span></span></label>
+            <label class="modo"><input type="radio" name="modo" value="contraste"><span><span class="modo__nombre">Alto contraste</span><span class="modo__desc">Colores de fondo y letra</span></span></label>
+            <label class="modo"><input type="radio" name="modo" value="voz"><span><span class="modo__nombre">Lectura en voz alta</span><span class="modo__desc">Escuchar con controles</span></span></label>
+            <label class="modo"><input type="radio" name="modo" value="partes"><span><span class="modo__nombre">Por partes</span><span class="modo__desc">Índice y partes cortas</span></span></label>
+            <label class="modo"><input type="radio" name="modo" value="imagenes"><span><span class="modo__nombre">Texto con imágenes</span><span class="modo__desc">Dibujos junto a las ideas</span></span></label>
+            <label class="modo"><input type="radio" name="modo" value="pictogramas"><span><span class="modo__nombre">Texto con pictogramas</span><span class="modo__desc">Pictogramas de ARASAAC</span></span></label>
+          </div>
+        </fieldset>
+
+        <!-- Controles: lectura ajustable -->
+        <section class="panel controles" id="controles-lectura" aria-labelledby="t-c-lectura">
+          <h3 id="t-c-lectura">Ajustes de la lectura</h3>
+          <div class="controles__grilla">
+            <div class="control">
+              <label class="etiqueta" for="c-tam">Tamaño de letra: <output id="o-tam" for="c-tam">125 %</output></label>
+              <input type="range" id="c-tam" min="100" max="300" step="25" value="125">
+            </div>
+            <div class="control">
+              <label class="etiqueta" for="c-inter">Espacio entre líneas: <output id="o-inter" for="c-inter">1,8</output></label>
+              <input type="range" id="c-inter" min="1.4" max="3" step="0.2" value="1.8">
+            </div>
+            <div class="control">
+              <label class="etiqueta" for="c-letras">Espacio entre letras: <output id="o-letras" for="c-letras">normal</output></label>
+              <input type="range" id="c-letras" min="0" max="0.2" step="0.04" value="0">
+            </div>
+            <div class="control">
+              <label class="etiqueta" for="c-palabras">Espacio entre palabras: <output id="o-palabras" for="c-palabras">normal</output></label>
+              <input type="range" id="c-palabras" min="0" max="0.5" step="0.1" value="0">
+            </div>
+            <div class="control">
+              <label class="etiqueta" for="c-ancho">Largo de los renglones</label>
+              <select id="c-ancho">
+                <option value="45ch">Cortos</option>
+                <option value="62ch" selected>Medianos</option>
+                <option value="85ch">Largos</option>
+              </select>
+            </div>
+            <div class="control">
+              <label class="etiqueta" for="c-fuente">Tipo de letra</label>
+              <select id="c-fuente">
+                <option value="atkinson" selected>Atkinson Hyperlegible (muy legible)</option>
+                <option value="sistema">Letra del sistema</option>
+                <option value="serif">Con remates (tipo libro)</option>
+                <option value="mono">Monoespaciada (todas las letras del mismo ancho)</option>
+              </select>
+            </div>
+          </div>
+          <p class="aviso solo-mayuscula" id="nota-letra">Con «Imprenta mayúscula» activa, el texto se ve en imprenta mayúscula y el tipo de letra elegido no se aplica. Para usar otro tipo de letra, elegí «Texto habitual» en los Ajustes de lectura de arriba.</p>
+          <div class="fila-botones">
+            <button type="button" class="boton" id="lectura-restablecer">Volver a los valores iniciales</button>
+          </div>
+        </section>
+
+        <!-- Controles: contraste -->
+        <section class="panel controles" id="controles-contraste" aria-labelledby="t-c-contraste" hidden>
+          <h3 id="t-c-contraste">Colores de lectura</h3>
+          <fieldset>
+            <legend>Elegí una combinación</legend>
+            <div class="opciones-radio">
+              <label class="opcion"><input type="radio" name="colores" value="normal" checked><span>Colores de la web</span></label>
+              <label class="opcion"><input type="radio" name="colores" value="negro-blanco"><span><span aria-hidden="true" class="muestra-color" style="background:#fff;color:#000">Aa</span> Negro sobre blanco (contraste 21 a 1)</span></label>
+              <label class="opcion"><input type="radio" name="colores" value="blanco-negro"><span><span aria-hidden="true" class="muestra-color" style="background:#000;color:#fff">Aa</span> Blanco sobre negro (21 a 1)</span></label>
+              <label class="opcion"><input type="radio" name="colores" value="negro-amarillo"><span><span aria-hidden="true" class="muestra-color" style="background:#ffe94d;color:#000">Aa</span> Negro sobre amarillo (más de 17 a 1)</span></label>
+              <label class="opcion"><input type="radio" name="colores" value="amarillo-negro"><span><span aria-hidden="true" class="muestra-color" style="background:#000;color:#ffe94d">Aa</span> Amarillo sobre negro (más de 17 a 1)</span></label>
+              <label class="opcion"><input type="radio" name="colores" value="azul-crema"><span><span aria-hidden="true" class="muestra-color" style="background:#fdf6e3;color:#0b2545">Aa</span> Azul oscuro sobre crema (más de 14 a 1)</span></label>
+            </div>
+          </fieldset>
+        </section>
+
+        <!-- Controles: voz -->
+        <section class="panel controles" id="controles-voz" aria-labelledby="t-c-voz" hidden>
+          <h3 id="t-c-voz">Lectura en voz alta</h3>
+          <div id="voz-no-disponible" class="aviso" hidden>
+            <p><strong>Tu navegador no tiene lectura en voz alta.</strong> Probá con Chrome, Edge, Safari o Firefox actualizados. Si usás un lector de pantalla, podés leer el texto con él.</p>
+          </div>
+          <p>La lectura empieza solo cuando tocás «Escuchar». Se lee un bloque por vez y el bloque que se está leyendo queda marcado con la palabra «Leyendo».</p>
+          <div class="fila-botones" role="group" aria-label="Controles de la voz">
+            <button type="button" class="boton boton--principal" id="voz-escuchar">Escuchar</button>
+            <button type="button" class="boton" id="voz-pausar" disabled>Pausar</button>
+            <button type="button" class="boton" id="voz-detener" disabled>Detener</button>
+            <button type="button" class="boton" id="voz-anterior">Bloque anterior</button>
+            <button type="button" class="boton" id="voz-siguiente">Bloque siguiente</button>
+          </div>
+          <div class="controles__grilla">
+            <div class="control">
+              <label class="etiqueta" for="voz-velocidad">Velocidad</label>
+              <select id="voz-velocidad">
+                <option value="0.7">Muy lenta</option>
+                <option value="0.85">Lenta</option>
+                <option value="1" selected>Normal</option>
+                <option value="1.2">Rápida</option>
+                <option value="1.45">Muy rápida</option>
+              </select>
+            </div>
+            <div class="control">
+              <label class="etiqueta" for="voz-voz">Voz</label>
+              <select id="voz-voz"><option value="">Voz predeterminada</option></select>
+            </div>
+          </div>
+          <p class="estado-modo" id="voz-posicion">Bloque 1 de 1</p>
+          <p class="visualmente-oculto" id="voz-estado" role="status" aria-live="polite"></p>
+        </section>
+
+        <!-- Controles: partes -->
+        <section class="panel controles" id="controles-partes" aria-labelledby="t-c-partes" hidden>
+          <h3 id="t-c-partes">Vista por partes</h3>
+          <p>Cada título del texto empieza una parte nueva. Si el texto no tiene títulos, cada párrafo es una parte. Usá el índice para saltar y marcá las partes que ya leíste.</p>
+        </section>
+
+        <!-- Controles: imágenes -->
+        <section class="panel controles" id="controles-imagenes" aria-labelledby="t-c-imagenes" hidden>
+          <h3 id="t-c-imagenes">Texto con imágenes</h3>
+          <p>Buscamos en cada párrafo palabras de una colección de dibujos simples (agua, sol, lluvia, río, planta, escuela y otras). Si una idea no tiene un dibujo que le corresponda, se muestra solo el texto.</p>
+          <p class="estado-modo" id="imagenes-estado"></p>
+        </section>
+
+        <!-- Controles: pictogramas -->
+        <section class="panel controles" id="controles-pictogramas" aria-labelledby="t-c-pictogramas" hidden>
+          <h3 id="t-c-pictogramas">Texto con pictogramas</h3>
+          <div class="aviso">
+            <p><strong>Antes de buscar:</strong> para encontrar los pictogramas se envían a ARASAAC hasta 4 palabras sueltas por párrafo (no el texto completo ni tu archivo). Necesitás conexión a internet.</p>
+          </div>
+          <p>Elegimos palabras de cada párrafo de forma automática. Solo mostramos un pictograma cuando ARASAAC tiene uno con esa misma palabra. Si no hay, queda solo el texto.</p>
+          <div class="fila-botones">
+            <button type="button" class="boton boton--principal" id="buscar-pictos">Buscar pictogramas en ARASAAC</button>
+            <button type="button" class="boton" id="cancelar-pictos" hidden>Detener la búsqueda</button>
+          </div>
+          <p class="estado-modo" id="pictos-estado" role="status" aria-live="polite"></p>
+          <p class="credito">Pictogramas: Sergio Palao. Origen: <a href="https://arasaac.org">ARASAAC</a>. Licencia: CC BY-NC-SA. Propiedad: Gobierno de Aragón (España).</p>
+        </section>
+
+        <section class="resultado" aria-labelledby="t-resultado">
+          <h3 id="t-resultado">Tu texto en «<span id="nombre-modo">Lectura ajustable</span>»</h3>
+          <div id="lectura" class="lectura" lang="es" data-colores="normal" data-fuente="atkinson"></div>
+        </section>
+
+        <div class="fila-botones">
+          <button type="button" class="boton boton--principal" id="descargar-adaptado">Descargar esta versión adaptada (.html)</button>
+          <a class="boton" href="#t-revisar" id="volver-revisar">Volver a corregir el texto</a>
+          <button type="button" class="boton" id="otro-material-2">Cargar otro material</button>
+        </div>
+        <p class="ayuda">El archivo descargado conserva el texto, el modo elegido y los dibujos disponibles. Abrilo con el navegador; desde allí también podés imprimirlo o guardarlo como PDF. La voz necesita un navegador compatible y los pictogramas pueden necesitar internet.</p>
+      </section>
+    </div>
+  </main>
+  <footer class="pie">
+    <div class="contenedor">
+      <p><strong>Bermejo Accesible</strong> («La información a tu manera») es un proyecto de código abierto creado para una hackatón en Formosa. Funciona en el navegador: no pide cuentas y no guarda tus materiales.</p>
+      <p>Los pictogramas que se muestran en «Texto con pictogramas» son de Sergio Palao. Origen: <a href="https://arasaac.org">ARASAAC</a>. Licencia: Creative Commons BY-NC-SA. Propiedad: Gobierno de Aragón (España).</p>
+      <p>Extracción de texto con <a href="https://tesseract.projectnaptha.com/">Tesseract.js</a> y <a href="https://mozilla.github.io/pdf.js/">PDF.js</a>. Tipografía <a href="https://www.brailleinstitute.org/freefont/">Atkinson Hyperlegible</a>, creada por Braille Institute. La letra en imprenta mayúscula usa «Bermejo Mayúscula», una adaptación de DejaVu Sans (licencia Bitstream Vera).</p>
+    </div>
+  </footer>
+
+</body>
+</html>

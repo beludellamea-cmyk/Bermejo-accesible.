@@ -1,0 +1,47 @@
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="index.html">
+        <svg class="marca__logo" viewBox="0 0 64 52" width="64" height="52" aria-hidden="true" focusable="false">
+          <path class="logo__pagina" d="M32 13 C25 7 13 6 4 9 V44 C13 41 25 42 32 48 Z"/>
+          <path class="logo__pagina" d="M32 13 C39 7 51 6 60 9 V44 C51 41 39 42 32 48 Z"/>
+          <path class="logo__rio" d="M9 35 C15 35 16 25 22 25 C28 25 28 36 34 36 C40 36 41 22 47 22 C51 22 53 26 55 27"/>
+        </svg>
+        <span class="marca__textos">
+          <span class="marca__nombre">Bermejo <span class="marca__acento">Accesible</span></span>
+          <span class="marca__lema">La información a tu manera</span>
+        </span>
+      </a>
+      <nav class="nav-principal" aria-label="Principal">
+        <ul>
+          <li><a href="index.html"{{ACT_INICIO}}>Inicio</a></li>
+          <li><a href="material.html"{{ACT_MATERIAL}}>Acceder a mi material</a></li>
+          <li><a href="docente.html"{{ACT_DOCENTE}}>Espacio docente</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="ajustes" role="region" aria-labelledby="ajustes-titulo">
+      <div class="contenedor ajustes__fila">
+        <p class="ajustes__titulo" id="ajustes-titulo">Ajustes de lectura</p>
+        <div class="ajustes__grupo" role="group" aria-labelledby="letra-etiqueta">
+          <span class="ajustes__etiqueta" id="letra-etiqueta">Letra:</span>
+          <button type="button" class="boton boton--letra-mayuscula" data-letra-opcion="mayuscula" aria-pressed="true">Imprenta mayúscula</button>
+          <span class="ajustes__barra" aria-hidden="true">/</span>
+          <button type="button" class="boton boton--letra-habitual" data-letra-opcion="habitual" aria-pressed="false">Texto habitual</button>
+        </div>
+        <div class="ajustes__grupo" role="group" aria-labelledby="tam-etiqueta">
+          <span class="ajustes__etiqueta" id="tam-etiqueta">Tamaño del texto:</span>
+          <button type="button" class="boton" data-ajuste="achicar">Más chico</button>
+          <span class="ajustes__valor" id="tam-valor">100 %</span>
+          <button type="button" class="boton" data-ajuste="agrandar">Más grande</button>
+        </div>
+        <div class="ajustes__grupo" role="group" aria-labelledby="con-etiqueta">
+          <span class="ajustes__etiqueta" id="con-etiqueta">Contraste:</span>
+          <button type="button" class="boton" data-contraste-opcion="normal" aria-pressed="true">Normal</button>
+          <button type="button" class="boton" data-contraste-opcion="alto" aria-pressed="false">Alto</button>
+        </div>
+        <button type="button" class="boton" data-ajuste="restablecer">Restablecer ajustes</button>
+        <p class="visualmente-oculto" id="ajustes-anuncio" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </header>
