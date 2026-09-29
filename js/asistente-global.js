@@ -35,17 +35,13 @@
     return s;
   }
   var ruta = location.pathname.split('/').pop() || 'index.html';
-  var boton = nodo('button', 'boton boton--principal ayuda-abrir', 'Necesito ayuda');
+  var boton = nodo('button', 'boton boton--principal ayuda-abrir', 'Estoy perdido');
   boton.type = 'button';
   boton.setAttribute('aria-expanded', 'false');
   boton.setAttribute('aria-controls', 'ayuda-panel');
   boton.prepend(icono('ayuda'));
-  var audioRapido = nodo('button', 'boton ayuda-escuchar', 'Escuchar ayuda');
-  audioRapido.type = 'button';
-  audioRapido.prepend(icono('voz'));
-  audioRapido.setAttribute('aria-controls', 'ayuda-panel');
   var lanzadores = nodo('div', 'ayuda-lanzadores');
-  lanzadores.append(boton, audioRapido);
+  lanzadores.append(boton);
   var panel = nodo('section', 'ayuda-panel');
   panel.id = 'ayuda-panel';
   panel.hidden = true;
@@ -67,7 +63,9 @@
   escuchar.prepend(icono('voz'));
   var repetir = nodo('button', 'boton', 'Repetir indicación');
   var apagar = nodo('button', 'boton', 'Apagar voz');
-  [escuchar, repetir, apagar].forEach(function (b) { b.type = 'button'; controles.appendChild(b); });
+  var mostrarComo = nodo('button', 'boton', 'Mostrarme cómo se hace');
+  var volver = nodo('button', 'boton', 'Volver al paso anterior');
+  [escuchar, repetir, apagar, mostrarComo, volver].forEach(function (b) { b.type = 'button'; controles.appendChild(b); });
   var estado = nodo('p', 'ayuda-panel__estado', 'La voz está apagada. Podés usar los botones sin escucharla.');
   estado.setAttribute('role', 'status');
   panel.append(cab, frase, opciones, controles, estado);
@@ -76,11 +74,13 @@
   else document.body.append(lanzadores, panel);
 
   var disponible = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
-  var vozActiva = false;
+  function leerSesion(k) { try { return sessionStorage.getItem(k); } catch (_) { return null; } }
+  function guardarSesion(k, v) { try { sessionStorage.setItem(k, v); } catch (_) {} }
+  var modoGuiado = leerSesion('bermejo-modo') === 'guiado';
+  var vozActiva = modoGuiado && leerSesion('bermejo-voz') !== 'off';
   var token = 0;
   if (!disponible) {
     [escuchar, repetir, apagar].forEach(function (b) { b.disabled = true; });
-    audioRapido.disabled = true;
     estado.textContent = 'La voz no está disponible en este navegador. Todas las indicaciones se muestran por escrito.';
   }
   function detener() {
@@ -101,9 +101,9 @@
     };
     window.speechSynthesis.speak(u);
   }
-  escuchar.addEventListener('click', hablar);
+  escuchar.addEventListener('click', function () { vozActiva = true; guardarSesion('bermejo-voz','on'); hablar(); });
   repetir.addEventListener('click', hablar);
-  apagar.addEventListener('click', function () { vozActiva = false; detener(); estado.textContent = 'La voz está apagada.'; });
+  apagar.addEventListener('click', function () { vozActiva = false; guardarSesion('bermejo-voz','off'); detener(); estado.textContent = 'La voz está apagada. La guía continúa por escrito.'; });
   function decir(texto) {
     frase.textContent = texto;
     if (vozActiva) hablar();
@@ -113,10 +113,9 @@
     panel.hidden = !abrir;
     boton.setAttribute('aria-expanded', String(abrir));
     if (abrir) { actualizar(); titulo.focus(); }
-    else { vozActiva = false; detener(); boton.focus(); }
+    else { detener(); boton.focus(); }
   }
   boton.addEventListener('click', function () { mostrar(panel.hidden); });
-  audioRapido.addEventListener('click', function () { if (disponible) { mostrar(true); hablar(); } });
   cerrar.addEventListener('click', function () { mostrar(false); });
   panel.addEventListener('keydown', function (e) { if (e.key === 'Escape') mostrar(false); });
   window.addEventListener('pagehide', detener);
@@ -129,7 +128,7 @@
   function acciones() {
     if (ruta === 'index.html') return {
       pregunta: 'Hola, ¿en qué puedo ayudarte? Podés entrar con tu propio material o conocer las herramientas para docentes.',
-      botones: [['Quiero acceder a un material', 'material.html'], ['Soy docente', 'docente.html'], ['Necesito un lector de pantalla', '#lector-titulo']]
+      botones: [['Trabajar con mi material', 'material.html'], ['Soy docente', 'docente.html'], ['Chat intercultural', 'qom.html']]
     };
     if (ruta === 'docente.html') return {
       pregunta: 'Hola, ¿en qué puedo ayudarte? Elegí qué parte del espacio docente querés consultar.',
@@ -137,7 +136,7 @@
     };
     if (paso() === 1) return {
       pregunta: 'Hola, ¿en qué puedo ayudarte? Primero elegí cómo querés cargar tu material.',
-      botones: [['Voy a pegar un texto', '#texto-pegado'], ['Voy a subir un PDF', '#archivo-pdf'], ['Voy a subir una foto', '#archivo-foto'], ['Tengo un video', '#archivo-video'], ['Probar Sociales de Formosa', '#usar-sociales'], ['Probar el ciclo del agua', '#usar-ejemplo']]
+      botones: [['Voy a pegar un texto', '#texto-pegado'], ['Voy a subir un PDF', '#archivo-pdf'], ['Voy a subir una foto', '#archivo-foto'], ['Probar Sociales de Formosa', '#usar-sociales'], ['Probar el ciclo del agua', '#usar-ejemplo']]
     };
     if (paso() === 2) return {
       pregunta: 'Ya cargaste el material. Revisá el texto y corregí lo que haga falta. Después elegí cómo leerlo.',
@@ -145,7 +144,7 @@
     };
     return {
       pregunta: 'Ya podés elegir cómo acceder a tu material. ¿Qué te ayudaría ahora?',
-      botones: [['Quiero escucharlo', 'modo:voz'], ['Prefiero leer por partes', 'modo:partes'], ['Necesito letra más grande', 'modo:agrandar'], ['Me ayudan las imágenes', 'modo:imagenes'], ['Ver todas las formas', '#modos-ayuda']]
+      botones: [['Escuchar', 'modo:voz'], ['Leer por partes', 'modo:partes'], ['Leer con apoyos visuales', 'modo:imagenes'], ['Trabajar con mi material', '#trabajar-material']]
     };
   }
   function abrirDestino(destino) {
@@ -154,8 +153,8 @@
     if (!el) return;
     panel.hidden = true;
     boton.setAttribute('aria-expanded', 'false');
-    vozActiva = false;
     detener();
+    var d = el.closest('details'); if (d) d.open = true;
     if (el.matches('input,button,textarea,a')) el.focus();
     else { if (!el.hasAttribute('tabindex')) el.tabIndex = -1; el.focus(); }
     el.scrollIntoView({ block: 'start' });
@@ -194,11 +193,11 @@
       var b = nodo('button', 'boton', item[0]);
       b.type = 'button';
       var simbolos = {
-        'material.html': 'libro', 'docente.html': 'docente', '#lector-titulo': 'voz',
+        'material.html': 'libro', 'docente.html': 'docente', 'qom.html': 'opciones', '#lector-titulo': 'voz',
         '#consulta': 'docente', '#guia': 'revisar', '#ideas': 'ideas', '#normativa': 'norma',
-        '#texto-pegado': 'texto', '#archivo-pdf': 'texto', '#archivo-foto': 'foto', '#archivo-video': 'imagen',
+        '#texto-pegado': 'texto', '#archivo-pdf': 'texto', '#archivo-foto': 'foto',
         '#usar-ejemplo': 'libro', '#usar-sociales': 'libro', '#texto-editable': 'revisar', '#ir-a-leer': 'seguir',
-        '#otro-material': 'foto', 'modo:voz': 'voz', 'modo:partes': 'partes',
+        '#otro-material': 'foto', '#trabajar-material': 'ideas', 'modo:voz': 'voz', 'modo:partes': 'partes',
         'modo:agrandar': 'ampliar', 'modo:imagenes': 'imagen', '#modos-ayuda': 'opciones'
       };
       b.prepend(icono(simbolos[item[1]]));
@@ -208,16 +207,59 @@
       });
       opciones.appendChild(b);
     });
-    estado.textContent = 'Elegí una opción. La voz se activa solo cuando pulsás «Escuchar indicación».';
+    estado.textContent = vozActiva ? 'Guía hablada activa. Esta indicación está escrita arriba.' : 'Guía escrita. Para escucharla, pulsá «Escuchar indicación».';
   }
   // Si se inicia la lectura del material, se detiene la indicación del asistente.
   document.addEventListener('click', function (e) {
     if (e.target.closest('#voz-escuchar')) { vozActiva = false; detener(); }
   }, true);
+  function iniciarGuia() {
+    modoGuiado = true; vozActiva = disponible;
+    guardarSesion('bermejo-modo','guiado'); guardarSesion('bermejo-voz', disponible ? 'on' : 'off');
+    mostrar(true); if (vozActiva) hablar();
+  }
+  window.BermejoGuia = { iniciar: iniciarGuia, manual: function () {
+    modoGuiado = false; vozActiva = false; detener(); guardarSesion('bermejo-modo','manual'); guardarSesion('bermejo-voz','off');
+  }};
+  mostrarComo.addEventListener('click', function () {
+    var destino = ruta === 'index.html' ? '.camino a[href="material.html"]' :
+      ruta === 'material.html' ? (paso() === 1 ? '#texto-pegado' : paso() === 2 ? '#texto-editable' : '[data-modo-rapido="voz"]') :
+      ruta === 'docente.html' ? '#consulta-texto' : '#chat-texto';
+    var el = $(destino); if (!el) return;
+    var detalle = el.closest('details'); if (detalle) detalle.open = true;
+    document.querySelectorAll('.ayuda-destacado').forEach(function (n) { n.classList.remove('ayuda-destacado'); });
+    el.classList.add('ayuda-destacado'); el.scrollIntoView({block:'center'}); el.focus();
+    decir('Mirá el elemento resaltado. Tocá o activá con Enter para continuar.');
+  });
+  volver.addEventListener('click', function () {
+    if (ruta === 'material.html' && paso() === 3) { $('#volver-revisar').click(); return; }
+    if (ruta === 'material.html' && paso() === 2) { $('#volver-cargar').click(); return; }
+    if (ruta !== 'index.html') location.href = 'index.html';
+    else decir('Estás en el inicio. Elegí una de las tres opciones para continuar.');
+  });
+  document.addEventListener('change', function (e) {
+    if (!modoGuiado || !e.target.matches('input[name="modo"]')) return;
+    var etiqueta = e.target.closest('label');
+    if (etiqueta) decir('Elegiste ' + etiqueta.innerText.trim() + '. Tu texto aparece a continuación.');
+  });
+  if (ruta === 'index.html') {
+    var bienvenida = $('#bienvenida');
+    var guiada = $('#bienvenida-guiada'), manual = $('#bienvenida-manual');
+    if (bienvenida && guiada && manual) {
+      guiada.addEventListener('click', function () { bienvenida.close(); iniciarGuia(); });
+      manual.addEventListener('click', function () { bienvenida.close(); window.BermejoGuia.manual(); $('main h1').focus(); });
+      bienvenida.addEventListener('cancel', function () { window.BermejoGuia.manual(); });
+      if (!leerSesion('bermejo-modo')) bienvenida.showModal();
+    }
+  }
+  if (modoGuiado && !$('#bienvenida')?.open) {
+    mostrar(true); if (vozActiva) hablar();
+  }
   if (ruta === 'material.html') {
     var pasos = [$('#paso-cargar'), $('#paso-revisar'), $('#paso-leer')].filter(Boolean);
     var observador = new MutationObserver(function () {
-      if (!panel.hidden) actualizar();
+      if (modoGuiado) { panel.hidden = false; boton.setAttribute('aria-expanded','true'); actualizar(); if (vozActiva) hablar(); }
+      else if (!panel.hidden) actualizar();
     });
     pasos.forEach(function (p) { observador.observe(p, { attributes: true, attributeFilter: ['hidden'] }); });
   }

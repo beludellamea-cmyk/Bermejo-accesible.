@@ -1,0 +1,15 @@
+BERMEJO ACCESIBLE — PROTOTIPO DESCARGABLE
+
+1. Extraé todo el contenido del ZIP en una carpeta. No abras index.html desde dentro del ZIP.
+2. Hacé doble clic en index.html para abrir la portada en tu navegador.
+3. Probá con ejemplos/ o pegá un texto en «Trabajar con mi material».
+4. Si querés compartir la copia, enviá el ZIP entero; todas las carpetas y archivos son necesarios.
+
+Qué requiere conexión:
+- El chat intercultural y las propuestas de lectura fácil y actividades requieren el Worker actualizado y un servicio de IA externo. GitHub Pages por sí solo no activa esa IA.
+- El reconocimiento de fotos, la extracción de algunos PDF, y pictogramas pueden necesitar bibliotecas o recursos externos.
+- Las voces dependen de las voces instaladas y de la compatibilidad del navegador.
+
+El código fuente está incluido. No agregues claves API a archivos públicos.
+Página publicada: https://beludellamea-cmyk.github.io/Bermejo-accesible./
+Para detalles técnicos y licencias, leé README.md.

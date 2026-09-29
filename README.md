@@ -1,5 +1,15 @@
 # Bermejo Accesible
 
+## Nueva versión: guía, lectura y actividades
+
+Al abrir la portada se elige entre ayuda guiada con voz o exploración manual. La elección queda en esta pestaña; la voz se puede apagar. El botón «Estoy perdido» abre indicaciones escritas, permite repetirlas y señalar el próximo control. No se usa micrófono.
+
+Después de cargar y corregir un texto aparecen tres accesos principales: **Escuchar**, **Leer por partes** y **Leer con apoyos visuales**. Las otras opciones están en «Más formas de lectura» y los ajustes existentes siguen disponibles. La paleta tiene acentos más vivos y un modo de alto contraste.
+
+En el paso de revisión se puede pedir una **propuesta de lectura fácil**. En el último paso se puede crear **una actividad breve** por materia y nivel, revisarla, practicarla, descargarla como HTML o imprimirla. El material adaptado también se descarga e imprime desde el archivo HTML. Ninguna propuesta se aplica sin revisión docente; el original se conserva para recuperarlo. Antes de cada envío se exige confirmar que se quitaron nombres y otros datos personales. Los textos enviados llegan al Worker y al proveedor de IA; no se guardan en el navegador después de cerrar o recargar la página.
+
+**Para activar la IA:** subí los archivos estáticos a GitHub Pages y actualizá el Worker `bermejochat` con `backend/chat-worker.js`. La versión anterior del Worker solo responde al chat; las nuevas funciones usan `POST /adaptar` y `POST /actividad`. Mantené `GEMINI_API_KEY` como secreto y `ALLOWED_ORIGIN` como origen exacto; revisá cuotas y condiciones del proveedor antes del uso escolar. Una subida del ZIP a GitHub Pages por sí sola no activa las nuevas funciones de IA.
+
 ## Chat intercultural con IA (requiere conectar un servicio)
 
 `qom.html` es una conversación presencial en un solo dispositivo. El estudiante puede escribir en qom, wichí, pilagá, nivaclé o guaraní; el docente escribe en español. La IA intenta traducir **cualquier frase nueva**, no usa un repertorio cerrado. Conserva hasta seis turnos de contexto para interpretar respuestas cortas; ambos textos se ven juntos. Cada traducción se identifica como automática y puede corregirse en la página. No es una conversación entre celulares. Los mensajes no se guardan al recargar.
@@ -8,7 +18,7 @@
 
 1. Creá una clave de la [API de Gemini en Google AI Studio](https://aistudio.google.com/app/apikey). La disponibilidad y los límites del servicio dependen de esa cuenta. No pegues la clave en el chat ni en el repositorio.
 2. Creá un [Cloudflare Worker desde el panel](https://developers.cloudflare.com/workers/get-started/dashboard/) y pegá el contenido de `backend/chat-worker.js` como código del Worker. Publicalo para obtener su URL `https://…workers.dev`.
-3. En **Settings → Variables and Secrets** del Worker, agregá `GEMINI_API_KEY` como **Secret** (valor: la clave obtenida en Google AI Studio). Agregá `ALLOWED_ORIGIN` como variable de texto con el origen exacto `https://beludellamea-cmyk.github.io`. Si tu repositorio pertenece a otra cuenta, reemplazá el origen. Opcional: `GEMINI_MODEL` con el identificador de un modelo compatible; el código usa `gemini-3.8-flash` si se omite.
+3. En **Settings → Variables and Secrets** del Worker, agregá `GEMINI_API_KEY` como **Secret** (valor: la clave obtenida en Google AI Studio). Agregá `ALLOWED_ORIGIN` como variable de texto con el origen exacto `https://beludellamea-cmyk.github.io`. Si tu repositorio pertenece a otra cuenta, reemplazá el origen. Opcional: `GEMINI_MODEL` con el identificador de un modelo compatible; el código usa `gemini-2.5-flash` si se omite.
 4. Este ZIP ya trae en `js/chat-config.js` la URL pública `https://bermejochat.beludellamea.workers.dev/`. Subí los archivos del sitio a GitHub Pages. Si cambiás de Worker en el futuro, actualizá solo esa dirección. Nunca subas la clave.
 5. Probá un mensaje nuevo que no esté en ningún diccionario, por ejemplo «Hola, ¿cómo estás?» escrito por el docente. Luego seleccioná «Estudiante» y probá responder en la lengua elegida. **No des por correcta una frase indígena solo porque la IA la generó**: hacela revisar por una persona hablante de la variedad local antes de presentar su contenido como traducción fiable.
 
@@ -16,9 +26,13 @@ El servicio hace una traducción **experimental** con un modelo general. No se p
 
 **La información a tu manera.**
 
-### Navegación por voz (portada, material y espacio docente)
+**Navegación reorganizada.** En computadora, las secciones están en una lista lateral con la página actual marcada por texto, subrayado y borde. En celular, el botón «Menú» muestra esa misma lista y se puede cerrar con Escape. Los ajustes de accesibilidad se abren desde el botón de la cabecera o el menú lateral. El inicio presenta tres caminos: material, espacio docente y chat intercultural. La información extensa queda dentro de «Más información sobre el sitio y las opciones de lectura». Tres formas principales de lectura se eligen en el paso 3; las seis formas permanecen disponibles, después de cargar y revisar un material. El enlace «Ir al contenido» sigue disponible en todas las páginas.
 
-En Inicio, Material y Docentes hay un botón flotante **«Ayuda por voz»**, junto al acceso visual a «Necesito ayuda». Al abrirlo da una bienvenida escrita y hablada. Solo escucha al pulsar «Hablar», reconoce una frase en español y apaga el micrófono después; «Detener micrófono» permite cancelarlo antes. La instrucción reconocida y las respuestas se muestran por escrito. Ejemplos: «adaptar mi material», «subir una foto», «subir un PDF», «ir a docentes», «ir a normativa», «volver al inicio», «agrandar la letra», «alto contraste», «escuchar el material», «leer por partes», «ver imágenes» y «necesito ayuda». Lleva al campo o botón real; si falta material cargado, explica el paso previo. También hay un botón para escuchar de nuevo la respuesta. No es un chatbot de preguntas abiertas ni escribe mensajes por dictado. El permiso de micrófono lo solicita el navegador; algunos navegadores no ofrecen reconocimiento o procesan el audio mediante su propio servicio, así que evitá datos sensibles. Los botones y lectores de pantalla permanecen disponibles. **La sección de traducciones no tiene micrófono**; sus lenguas necesitan pruebas específicas con hablantes.
+
+
+### Ayuda accesible
+
+La ayuda se reúne en «Estoy perdido». El panel guía por escrito según la página y el paso. «Escuchar indicación» activa la voz cuando se pulsa; también permite repetirla o apagarla. No se usa micrófono.
 
 Bermejo Accesible es una web para sacar el texto de un material (texto pegado, PDF o foto) y leerlo de la forma que mejor le sirva a cada estudiante. También tiene un espacio para docentes con:
 - una consulta por situación,
@@ -30,7 +44,7 @@ Proyecto creado para una hackatón en Formosa sobre barreras de acceso a la info
 
 **Ejemplos situados para la demostración:** «Ciencias Sociales: el río Bermejo y El Colorado» es un texto didáctico original, con una página simulada como PNG y el mismo contenido en TXT; no es una página oficial ni de un estudiante real. Su ubicación geográfica se contrastó con la [reseña de El Colorado publicada por el Gobierno de Formosa](https://m.formosa.gob.ar/noticia/10511/61/el_colorado_feriarte__). También se incluye una página auténtica del material de Geografía de Formosa aportado por el equipo (`ejemplos/geografia-formosa-pagina-6.pdf`, módulo 1, página 6), para demostrar la lectura de un PDF real. El ejemplo creado y el PDF real son materiales diferentes.
 
-**YouTube y apoyo visual:** la sección del estudiante permite pegar un enlace de YouTube y su transcripción. Solo después de pulsar «Ver video y adaptar transcripción» se carga el reproductor, y la transcripción sigue el mismo recorrido de corrección y seis modos de lectura. El enlace solo no se puede transcribir automáticamente. Para la demostración de Sociales y la página de Geografía se incluyen tres escenas generadas con IA y revisadas, con texto alternativo; son escenas generales y no mapas precisos. No se crean imágenes nuevas para materiales arbitrarios.
+**Apoyo visual:** el ejemplo de Sociales y la página de Geografía permiten mostrar escenas ilustrativas con texto alternativo dentro de las formas de lectura. Son escenas generales y no mapas precisos.
 
 ## Qué hace
 
@@ -49,13 +63,13 @@ Proyecto creado para una hackatón en Formosa sobre barreras de acceso a la info
 
 El botón «Necesito ayuda» está disponible en la portada, el recorrido del estudiante y el espacio docente. Al abrirlo, muestra orientación y acciones distintas según la página y el paso visible. La voz se activa solo con «Escuchar indicación» y se puede apagar; todo lo dicho está también escrito. No usa micrófono ni interpreta preguntas abiertas.
 
-La ayuda tiene símbolos sencillos **junto al texto** (pregunta, libro, docente, foto, voz, etcétera), para que una persona que todavía no lee pueda reconocer opciones. Junto a «Necesito ayuda» hay un botón «Escuchar ayuda» con un altavoz: un toque abre el panel y lee en voz alta la orientación de la página. No comienza a hablar sola. Los símbolos son decorativos para el lector de pantalla: cada botón conserva su nombre escrito. Si el dispositivo no ofrece voz, ese botón queda desactivado y la orientación escrita sigue disponible. Los símbolos son apoyos, no sustituyen las pruebas con personas que no leen.
+La ayuda usa símbolos junto al texto; cada botón conserva su nombre escrito. La orientación hablada está dentro del panel y comienza solo cuando se pulsa «Escuchar indicación».
 
 ### Acceder a mi material (`material.html`)
 
 Funciona en tres pasos:
 
-1. **Cargar el material.** Se puede pegar texto, subir un PDF, subir una foto o sacarla con la cámara; también se puede elegir un video local y agregar subtítulos o una transcripción. Hay ejemplos.
+1. **Cargar el material.** Se puede pegar texto, subir un PDF, subir una foto o sacarla con la cámara; hay ejemplos opcionales en un apartado desplegable.
 2. **Revisar el texto.** El texto extraído se puede editar. Se puede volver al texto extraído, descargarlo como `.txt` y ver el original.
 3. **Elegir cómo leer**, entre seis formas:
 
@@ -68,7 +82,6 @@ Funciona en tres pasos:
 
 Al final del paso 3, **«Descargar esta versión adaptada (.html)»** guarda la forma de lectura elegida en un archivo que se abre con cualquier navegador. Conserva el texto corregido, los ajustes visuales, las partes y los dibujos que se ven en pantalla. Desde el navegador se puede imprimir o guardar como PDF. En modo voz, el archivo incluye botones para escuchar y detener la lectura (depende de las voces del dispositivo); no genera un archivo de audio. Intenta incluir los pictogramas en el archivo; si el navegador no permite descargarlos, algunas imágenes necesitan conexión a internet, y el texto alternativo sigue disponible. La descarga se prepara en el navegador, sin enviar el material a un servidor.
 
-**Video (prototipo):** se elige un MP4 o WebM de hasta 200 MB, más subtítulos `.srt` o `.vtt`, una transcripción `.txt` o texto pegado. Los subtítulos aparecen en el reproductor nativo; el texto extraído o pegado entra al mismo paso de corrección y los mismos seis modos. Se puede agregar una descripción escrita de información visual importante. El sitio **no transcribe ni describe el video automáticamente**: necesita que alguien aporte y revise esa información. Si se descarga el material adaptado, se guarda el **texto y sus apoyos**, no el archivo de video; para compartir ambos se deben entregar por separado. Incluye `ejemplos/ciclo-del-agua-video.mp4` y `ejemplos/ciclo-del-agua-video.vtt` para la demostración. El video de ejemplo es silencioso y sus subtítulos expresan lo que aparece en pantalla.
 
 ### Espacio docente (`docente.html`)
 
@@ -99,7 +112,7 @@ Todo el contenido docente está marcado como **sujeto a revisión docente**.
 ## Estructura
 
 ```
-index.html              Portada: dos caminos y «¿Usás un lector de pantalla?»
+index.html              Portada: tres caminos y más información desplegable
 material.html           Recorrido del estudiante
 docente.html            Espacio docente
 qom.html                Chat intercultural presencial con traducción de IA
@@ -109,16 +122,14 @@ css/estilos.css         Estilos
 js/preferencias.js      Letra, tamaño y contraste de todo el sitio
 js/material.js          Extracción de texto, revisión y los seis modos
 js/descargar-material.js   Descarga de la versión adaptada como HTML autónomo
-js/video.js             Reproducción local de video, subtítulos y transcripción
 js/ilustraciones.js     Dibujos para «Texto con imágenes»
 js/docente.js           Guía, revisor y filtro de normativa
 js/consulta.js          «Contame qué pasa en tu aula»
-js/voz-navegacion.js    Comandos voluntarios por voz en español (excepto chat)
 js/qom.js               Conversación y correcciones en pantalla
 js/chat-config.js       URL pública del servicio de traducción
 backend/chat-worker.js  Servicio para Cloudflare Workers (clave en secreto)
 fuentes/                Fuente «Bermejo Mayúscula» (regular y negrita) y su licencia
-ejemplos/               Materiales de prueba (TXT, PDF, foto, video y VTT)
+ejemplos/               Materiales de prueba (TXT, PDF y foto)
 _partes/                Fuentes de las páginas y scripts para regenerarlas
 .nojekyll               Evita que GitHub Pages procese el sitio con Jekyll
 ```
@@ -144,10 +155,8 @@ La lectura de PDF y fotos, la tipografía Atkinson Hyperlegible y los pictograma
 2. **Estudiante.**
    - Cargar el ejemplo o subir `ejemplos/ciclo-del-agua.pdf` o `ejemplos/ciclo-del-agua-foto.png`.
    - Corregir el texto y recorrer las seis formas de lectura.
-   - Para video, descargar el MP4 y el VTT de ejemplo; subir ambos, tocar «Usar video y revisar texto» y continuar al paso 3. Abrir el menú de subtítulos del reproductor si el navegador no los muestra automáticamente. Descargar el HTML adaptado y abrirlo para comprobar que se conserva la transcripción (el video se mantiene como archivo aparte).
    - Para la demostración de Sociales, pulsar «Probar el ejemplo de Sociales», revisar el texto y mostrar voz, partes e imágenes. Después descargar el PNG «página de cuaderno de ejemplo», cargarlo en «Foto de tu material» y corregir cualquier palabra que el reconocimiento automático haya leído mal. Por último descargar la versión adaptada e imprimirla o guardarla como PDF.
    - Para el material real de Geografía, descargar `ejemplos/geografia-formosa-pagina-6.pdf` desde la misma sección, cargarlo en «Subir un PDF» y pulsar «Leer el PDF». Revisar el texto extraído: el original está en dos columnas y su imagen no recibe una descripción automática. Elegir voz o lectura por partes y descargar la adaptación. Verificar los datos históricos y geográficos antes de reutilizarlos en clase; el material es de 2012.
-   - Para YouTube, copiar el enlace de un video que permita insertarse, pegar una transcripción en el campo correspondiente y pulsar «Ver video y adaptar transcripción». Revisar el texto y seleccionar un modo de lectura. Probar campos vacíos o un enlace que no sea de YouTube: la página muestra un error claro. El enlace y la transcripción quedan en el navegador; el reproductor de YouTube necesita internet y tiene sus propias reglas de privacidad.
    - En la demostración de Sociales o en el PDF de Geografía, elegir «Texto con imágenes»: aparecen las tres escenas ilustrativas junto al contenido. Comprobar los textos alternativos con lector de pantalla; al descargar el HTML adaptado desde GitHub Pages, se incluyen las escenas. Al abrir la web como archivo local, el navegador puede impedir que la descarga incorpore las imágenes: el texto permanece disponible.
 3. **Docente.** En «Contame qué pasa en tu aula», probar:
    - «Tengo un estudiante que no ve bien el pizarrón y las fotocopias le salen con letra chica»: aparece el caso de visión, con la 2481/24 destacada.
@@ -190,7 +199,7 @@ La cabecera y el pie se comparten entre las cuatro páginas.
 
 - **Materiales y consultas docentes.** Se procesan en el navegador y no se guardan.
 - **Chat intercultural.** Al activarlo, los mensajes y hasta seis turnos previos se envían al Worker y al proveedor de IA. El historial visible se borra al cerrar o recargar la página; las políticas y el tratamiento de datos del proveedor requieren revisión antes de uso escolar. El Worker no incluye almacenamiento propio.
-- **Qué se guarda en este navegador.** Solo las preferencias de letra, tamaño y contraste, en `localStorage`.
+- **Qué se guarda en este navegador.** Las preferencias de letra, tamaño y contraste, en `localStorage`; la elección de guía y voz en `sessionStorage` durante esta pestaña.
 - **Qué se descarga, y solo cuando hace falta:**
   - PDF.js 3.11.174 desde jsDelivr;
   - Tesseract.js 5.1.1 desde jsDelivr, con los datos del idioma español;
@@ -203,8 +212,6 @@ La cabecera y el pie se comparten entre las cuatro páginas.
 - **Límites de archivos.**
   - PDF: hasta 40 páginas y 40 MB, sin contraseña.
   - Fotos: no se aceptan en formato HEIC.
-  - Video: MP4 y WebM de hasta 200 MB; la reproducción depende del formato y códec admitidos por el navegador. Los subtítulos o la transcripción deben ser `.srt`, `.vtt` o `.txt`, hasta 1 MB.
-  - El video original no se incrusta en el archivo HTML descargado; no se crean subtítulos ni descripción de imágenes automáticamente. La lectura en voz alta del texto puede superponerse con el audio del video: pausá el video antes de escuchar el texto.
 - **Voz.** Depende de las voces instaladas en el dispositivo.
 - **Apoyos visuales.**
   - «Texto con imágenes» tiene unos 22 dibujos.

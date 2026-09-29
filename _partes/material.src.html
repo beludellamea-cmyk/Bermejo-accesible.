@@ -4,27 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Acceder a mi material | Bermejo Accesible</title>
-  <meta name="description" content="Pegá texto, subí un PDF o foto, o usá un video con subtítulos. Revisá el texto y leelo con letra ajustable, voz, partes, imágenes o pictogramas.">
+  <meta name="description" content="Pegá texto, subí un PDF o una foto. Revisá el texto y leelo con letra ajustable, voz, partes, imágenes o pictogramas.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;display=swap">
   <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/navegacion.js" defer></script>
   <script src="js/preferencias.js"></script>
   <script src="js/asistente-global.js" defer></script>
-  <script src="js/voz-ayuda.js" defer></script>
   <script src="js/ilustraciones.js" defer></script>
   <script src="js/material.js" defer></script>
   <script src="js/descargar-material.js" defer></script>
-  <script src="js/video.js" defer></script>
-  <script src="js/youtube.js" defer></script>
+  <script src="js/chat-config.js"></script>
+  <script src="js/ia-material.js" defer></script>
 </head>
 <body>
 {{CABECERA}}
   <main id="contenido" tabindex="-1">
     <div class="contenedor">
-      <h1>Acceder a mi material</h1>
-      <p class="intro">En tres pasos: cargás tu material, revisás el texto y elegís cómo leerlo. Los textos se procesan en este dispositivo; si abrís YouTube, se carga su reproductor externo.</p>
+      <h1>Trabajar con mi material</h1>
+      <p class="intro">Cargá un texto, PDF o foto. Revisalo, elegí cómo acceder y, si querés, hacé una actividad relacionada.</p>
 
       <ol class="indicador" aria-label="Pasos">
         <li id="ind-1" aria-current="step">Cargar</li>
@@ -39,17 +39,6 @@
       <noscript>
         <div class="aviso"><p><strong>Esta parte necesita JavaScript.</strong> Activalo en tu navegador para leer tus materiales. El espacio docente funciona sin JavaScript.</p></div>
       </noscript>
-
-      <section class="panel video-vista" id="video-vista" aria-labelledby="t-video-vista" hidden>
-        <h2 id="t-video-vista">Video original</h2>
-        <video id="video-reproductor" controls playsinline preload="metadata" aria-label="Video original con subtítulos cuando están disponibles"></video>
-        <p class="ayuda">El video queda en tu dispositivo. Las opciones de lectura trabajan con la transcripción; la descarga adaptada contiene el texto, no el archivo de video.</p>
-      </section>
-      <section class="panel video-vista" id="youtube-vista" aria-labelledby="t-youtube-vista" hidden>
-        <h2 id="t-youtube-vista">Video de YouTube</h2>
-        <div class="youtube-marco" id="youtube-marco"></div>
-        <p class="ayuda">El reproductor necesita internet. Para adaptar lo que se dice, se usa la transcripción que pegaste; el enlace por sí solo no entrega el texto.</p>
-      </section>
 
       <!-- ================= PASO 1 ================= -->
       <section class="paso" id="paso-cargar" aria-labelledby="t-cargar">
@@ -88,37 +77,7 @@
           </section>
         </div>
 
-        <section class="panel video-carga" aria-labelledby="t-youtube-carga">
-          <h3 id="t-youtube-carga">Video de YouTube con transcripción</h3>
-          <p>Pegá el enlace y la transcripción del video. Si en YouTube aparece «Mostrar transcripción», podés copiarla y corregirla aquí. Esta página no obtiene los subtítulos automáticamente.</p>
-          <label class="etiqueta" for="youtube-url">Enlace del video de YouTube</label>
-          <input type="url" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." inputmode="url" aria-describedby="youtube-ayuda">
-          <label class="etiqueta" for="youtube-texto">Transcripción del video</label>
-          <textarea id="youtube-texto" rows="7" placeholder="Pegá acá lo que se dice en el video" aria-describedby="youtube-ayuda"></textarea>
-          <label class="etiqueta" for="youtube-descripcion">Descripción de imágenes importantes (opcional)</label>
-          <textarea id="youtube-descripcion" rows="3" placeholder="Por ejemplo: aparece un mapa que muestra Formosa"></textarea>
-          <p class="ayuda" id="youtube-ayuda">Los subtítulos visibles en YouTube no se copian solos. Revisá palabras, nombres y datos antes de continuar.</p>
-          <p class="error-campo" id="youtube-error" role="alert" tabindex="-1" hidden></p>
-          <button type="button" class="boton boton--principal" id="youtube-usar">Ver video y adaptar transcripción</button>
-        </section>
-
-        <section class="panel video-carga" aria-labelledby="t-video-carga">
-          <h3 id="t-video-carga">Video con transcripción o subtítulos</h3>
-          <p>Elegí un video de tu dispositivo. Para adaptar lo que dice, agregá sus subtítulos (.srt o .vtt) o pegá una transcripción. Si las imágenes muestran algo importante que no se dice, podés describirlo.</p>
-          <label class="etiqueta" for="archivo-video">Video (MP4 o WebM)</label>
-          <input type="file" id="archivo-video" accept="video/mp4,video/webm,.mp4,.webm">
-          <label class="etiqueta" for="archivo-subtitulos">Subtítulos o transcripción (.srt, .vtt o .txt)</label>
-          <input type="file" id="archivo-subtitulos" accept=".srt,.vtt,.txt,text/plain,text/vtt">
-          <label class="etiqueta" for="video-transcripcion">O pegá la transcripción</label>
-          <textarea id="video-transcripcion" rows="5" placeholder="Escribí aquí lo que se dice en el video"></textarea>
-          <label class="etiqueta" for="video-descripcion">Descripción de imágenes importantes (opcional)</label>
-          <textarea id="video-descripcion" rows="3" placeholder="Por ejemplo: aparece un mapa que señala El Colorado"></textarea>
-          <p class="error-campo" id="video-error" role="alert" tabindex="-1" hidden></p>
-          <button type="button" class="boton boton--principal" id="video-usar">Usar video y revisar texto</button>
-          <p class="ayuda">La página no genera subtítulos automáticamente. Si no tenés una transcripción, podés mirar el video, pero hace falta escribir o conseguir el texto para adaptarlo.</p>
-          <p>Para probar, descargá el <a href="ejemplos/ciclo-del-agua-video.mp4" download>video de ejemplo (MP4)</a> y sus <a href="ejemplos/ciclo-del-agua-video.vtt" download>subtítulos (VTT)</a>. Después cargá los dos archivos arriba.</p>
-        </section>
-
+        <details class="demo-detalle"><summary>Probar con ejemplos (opcional)</summary>
         <section class="panel" aria-labelledby="t-ejemplo">
           <h3 id="t-ejemplo">Probar con un ejemplo</h3>
           <p>El ejemplo «El ciclo del agua» sirve para probar las seis formas de lectura, incluidas las imágenes y los pictogramas.</p>
@@ -129,7 +88,7 @@
         </section>
 
         <section class="panel" aria-labelledby="t-ejemplo-sociales">
-          <h3 id="t-ejemplo-sociales">Demostración: un cuaderno de Sociales de Formosa</h3>
+          <h3 id="t-ejemplo-sociales">Ejemplo de Sociales de Formosa</h3>
           <p>Ejemplo didáctico original sobre El Colorado y el río Bermejo. No es una página de un cuaderno oficial ni de un estudiante real. Sirve para mostrar cómo un mismo contenido puede leerse de varias maneras.</p>
           <button type="button" class="boton boton--principal" id="usar-sociales">Probar el ejemplo de Sociales</button>
           <p>Si querés demostrar la lectura de una página en imagen, descargá la <a href="ejemplos/sociales-bermejo-cuaderno.png" download>página de cuaderno de ejemplo (PNG)</a> y después cargala en «Foto de tu material». También está el <a href="ejemplos/sociales-bermejo.txt" download>texto de ejemplo (TXT)</a>.</p>
@@ -138,15 +97,9 @@
           <p>La página del material aportado por el equipo trata sobre la localización de Formosa, sus límites, departamentos y contexto histórico (módulo 1, página 6). Este PDF tiene texto seleccionable. La foto de las banderas forma parte del original; la lectura del PDF extrae texto, pero no describe esa imagen automáticamente.</p>
           <p><a href="ejemplos/geografia-formosa-pagina-6.pdf" download>Descargar la página de Geografía (PDF, una página)</a>. Después, en «Subir un PDF», elegí ese archivo y pulsá «Leer el PDF». Revisá el texto extraído antes de elegir voz, lectura por partes u otra forma de acceso.</p>
           <p class="ayuda">El ejemplo «El Colorado y el río Bermejo» es una actividad creada para esta demostración: su texto es distinto del libro. Revisá la vigencia de los datos del libro antes de usarlo en clase.</p>
-          <h4>Tres ilustraciones de apoyo para la demostración</h4>
-          <p>Son imágenes generadas con IA y revisadas para acompañar ideas del material: el paisaje de llanura y vegetación, un río entre orillas y el estudio de mapas y cuadernos. Son escenas ilustrativas; el mapa dibujado no reproduce la geografía exacta.</p>
-          <div class="laminas-formosa" id="laminas-formosa-demo" aria-label="Tres ilustraciones de apoyo de Formosa">
-            <figure class="lamina"><img src="img/laminas-formosa-ia.png" alt="Ilustración de una llanura con árboles y vegetación abundante, para imaginar un paisaje de la región chaqueña." class="lamina__foto lamina__foto--1" loading="lazy"><figcaption>Paisaje y vegetación</figcaption></figure>
-            <figure class="lamina"><img src="img/laminas-formosa-ia.png" alt="Ilustración de un río ancho que serpentea entre dos orillas verdes; no es una fotografía del río Bermejo." class="lamina__foto lamina__foto--2" loading="lazy"><figcaption>El río y sus orillas</figcaption></figure>
-            <figure class="lamina"><img src="img/laminas-formosa-ia.png" alt="Ilustración de unas manos que estudian un mapa y un cuaderno; el mapa es imaginario y no debe usarse para ubicar lugares." class="lamina__foto lamina__foto--3" loading="lazy"><figcaption>Estudiar el territorio</figcaption></figure>
-          </div>
-          <p class="ayuda">Contenido visual generado con IA. Las descripciones escritas ofrecen la misma idea general de cada imagen.</p>
         </section>
+
+        </details>
 
         <div class="progreso panel" id="progreso" hidden>
           <p class="progreso__texto" id="progreso-texto">Preparando…</p>
@@ -190,9 +143,27 @@
             <div id="original"></div>
           </section>
         </div>
+        <details class="ia-panel" id="ia-lectura-facil">
+          <summary>✨ Explicámelo con palabras más fáciles (IA opcional)</summary>
+          <div class="ia-panel__contenido">
+            <p>La IA propone otra redacción del texto revisado. Conservá y compará el original: puede cambiar datos o perder ideas.</p>
+            <label class="ia-consentimiento"><input type="checkbox" id="ia-consentimiento"> Quité nombres y datos personales. Entiendo que el texto se enviará al servicio de IA para preparar la propuesta.</label>
+            <div class="fila-botones"><button type="button" class="boton boton--principal" id="ia-adaptar">Crear propuesta de lectura fácil</button></div>
+            <p id="ia-adaptar-estado" role="status" aria-live="polite"></p>
+            <div id="ia-adaptar-resultado" hidden>
+              <div class="ia-comparacion">
+                <div><h3>Texto original revisado</h3><div id="ia-original" class="ia-texto-original"></div></div>
+                <div><label class="etiqueta" for="ia-propuesta">Propuesta para corregir</label><textarea id="ia-propuesta" rows="12"></textarea></div>
+              </div>
+              <label class="ia-consentimiento"><input type="checkbox" id="ia-revision"> Un docente revisó la propuesta y comprobó que conserva el sentido y los datos.</label>
+              <div class="fila-botones"><button type="button" class="boton" id="ia-usar">Usar el texto revisado</button><button type="button" class="boton" id="ia-recuperar" hidden>Recuperar el original</button></div>
+            </div>
+          </div>
+        </details>
         <div class="fila-botones">
           <button type="button" class="boton boton--principal" id="ir-a-leer">Continuar: elegir cómo leer</button>
-          <button type="button" class="boton" id="otro-material">Cargar otro material</button>
+          <button type="button" class="boton" id="volver-cargar">Volver a cargar</button>
+          <button type="button" class="boton" id="otro-material">Borrar y cargar otro material</button>
         </div>
       </section>
 
@@ -201,6 +172,13 @@
         <h2 id="t-leer" tabindex="-1">Paso 3. Elegí cómo leer</h2>
         <p>Podés cambiar de forma cuando quieras. El tamaño de letra y los colores que elijas se mantienen en todas las formas.</p>
 
+        <div class="accesos-lectura" role="group" aria-label="Elegí cómo acceder al material">
+          <button type="button" class="boton acceso-lectura" data-modo-rapido="voz" aria-pressed="false">🔊 <span>Escuchar</span></button>
+          <button type="button" class="boton acceso-lectura" data-modo-rapido="partes" aria-pressed="false">☷ <span>Leer por partes</span></button>
+          <button type="button" class="boton acceso-lectura" data-modo-rapido="imagenes" aria-pressed="false">▧ <span>Leer con apoyos visuales</span></button>
+        </div>
+        <p>El texto completo aparece abajo. Para cambiar tamaño, letra y contraste, usá «Ajustes de accesibilidad».</p>
+        <details class="modos-avanzados"><summary>Más opciones de lectura y colores</summary>
         <fieldset class="modos">
           <legend>Forma de lectura</legend>
           <div class="modos__opciones">
@@ -212,6 +190,7 @@
             <label class="modo"><input type="radio" name="modo" value="pictogramas"><span><span class="modo__nombre">Texto con pictogramas</span><span class="modo__desc">Pictogramas de ARASAAC</span></span></label>
           </div>
         </fieldset>
+        </details>
 
         <!-- Controles: lectura ajustable -->
         <section class="panel controles" id="controles-lectura" aria-labelledby="t-c-lectura">
@@ -318,6 +297,7 @@
           <h3 id="t-c-imagenes">Texto con imágenes</h3>
           <p>Buscamos en cada párrafo palabras de una colección de dibujos simples (agua, sol, lluvia, río, planta, escuela y otras). Si una idea no tiene un dibujo que le corresponda, se muestra solo el texto.</p>
           <p class="estado-modo" id="imagenes-estado"></p>
+          <button type="button" class="boton" id="elegir-pictogramas">Usar pictogramas en vez de dibujos</button>
         </section>
 
         <!-- Controles: pictogramas -->
@@ -338,6 +318,38 @@
         <section class="resultado" aria-labelledby="t-resultado">
           <h3 id="t-resultado">Tu texto en «<span id="nombre-modo">Lectura ajustable</span>»</h3>
           <div id="lectura" class="lectura" lang="es" data-colores="normal" data-fuente="atkinson"></div>
+        </section>
+
+        <section class="actividad" id="trabajar-material" aria-labelledby="actividad-titulo">
+          <h3 id="actividad-titulo">Trabajar con mi material</h3>
+          <p>Podés crear una actividad breve sobre este material, de cualquier materia y nivel. La IA propone una consigna; el docente la revisa antes de usarla.</p>
+          <div class="actividad__datos">
+            <div><label for="actividad-materia">Materia o área</label><input id="actividad-materia" type="text" maxlength="80" placeholder="Por ejemplo: Ciencias Naturales"></div>
+            <div><label for="actividad-nivel">Nivel o grado</label><input id="actividad-nivel" type="text" maxlength="80" placeholder="Por ejemplo: 6.º grado"></div>
+            <div><label for="actividad-formato">Tipo de actividad</label><select id="actividad-formato"><option value="opciones">Elegir una respuesta</option><option value="breve">Responder con palabras</option></select></div>
+          </div>
+          <label class="ia-consentimiento"><input type="checkbox" id="actividad-consentimiento"> Quité nombres y datos personales. Entiendo que el texto se enviará al servicio de IA para proponer la actividad.</label>
+          <div class="fila-botones"><button type="button" class="boton boton--principal" id="actividad-generar">Proponer una actividad con IA</button></div>
+          <p id="actividad-estado" role="status" aria-live="polite"></p>
+          <div id="actividad-editor" hidden>
+            <h4>Revisión docente</h4>
+            <p>Corregí la consigna, las respuestas y la explicación. Se mostrará una actividad por vez.</p>
+            <label for="actividad-consigna">Consigna</label><textarea id="actividad-consigna" rows="3"></textarea>
+            <div id="actividad-opciones-editor">
+              <label for="actividad-opcion-1">Opción 1</label><input id="actividad-opcion-1" type="text">
+              <label for="actividad-opcion-2">Opción 2</label><input id="actividad-opcion-2" type="text">
+              <label for="actividad-opcion-3">Opción 3</label><input id="actividad-opcion-3" type="text">
+            </div>
+            <label for="actividad-respuesta">Respuesta correcta o respuesta esperada</label><input id="actividad-respuesta" type="text">
+            <label for="actividad-explicacion">Explicación para revisar el resultado</label><textarea id="actividad-explicacion" rows="3"></textarea>
+            <label class="ia-consentimiento"><input type="checkbox" id="actividad-revisada"> Soy docente y revisé esta actividad antes de mostrarla.</label>
+            <div class="fila-botones"><button type="button" class="boton" id="actividad-publicar">Mostrar actividad revisada</button></div>
+          </div>
+          <div id="actividad-practica" hidden>
+            <h4>Tu actividad</h4><p id="actividad-pregunta"></p><div id="actividad-responder"></div>
+            <div class="fila-botones"><button type="button" class="boton boton--principal" id="actividad-comprobar">Comprobar respuesta</button><button type="button" class="boton" id="actividad-descargar">Descargar actividad (.html)</button><button type="button" class="boton" id="actividad-imprimir">Imprimir actividad</button></div>
+            <p id="actividad-devolucion" role="status" aria-live="polite"></p>
+          </div>
         </section>
 
         <div class="fila-botones">

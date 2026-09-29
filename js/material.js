@@ -531,14 +531,6 @@
     mostrarRevision(texto, []);
   });
 
-  // Reutiliza el mismo recorrido de corrección y lectura para transcripciones.
-  window.BermejoCargarTranscripcion = function (texto, nombre, enlace) {
-    if (!texto.trim()) return;
-    limpiarErrores();
-    estado.origen = { tipo: 'video', nombre: nombre, textoOriginal: texto, enlace: enlace || '' };
-    mostrarRevision(texto, ['Los subtítulos y las descripciones pueden contener errores. Revisalos antes de seguir.']);
-  };
-
   $('#leer-pdf').addEventListener('click', async function () {
     var archivo = el.archivoPdf.files[0];
     if (!archivo) {
@@ -670,6 +662,7 @@
     var limpio = limpiarTexto(texto);
     estado.textoExtraido = limpio;
     el.editable.value = limpio;
+    document.dispatchEvent(new CustomEvent('bermejo:material-nuevo'));
 
     el.avisos.innerHTML = '';
     var lista = avisos.slice();
@@ -716,18 +709,11 @@
       el.original.appendChild(a2);
     } else {
       el.original.appendChild(crear('p', null, o.tipo === 'ejemplo' ? 'Estás usando el texto de ejemplo.' :
-        o.tipo === 'video' ? 'Transcripción del video «' + o.nombre + '», sin cambios:' : 'Tu texto pegado, sin cambios:'));
+        'Tu texto pegado, sin cambios:'));
       var det = document.createElement('details');
       det.appendChild(crear('summary', null, 'Ver el texto original'));
       det.appendChild(crear('div', 'original__texto', o.textoOriginal));
       el.original.appendChild(det);
-      if (o.enlace) {
-        var enlace = crear('a', null, 'Abrir el video original en YouTube (otra pestaña)');
-        enlace.href = o.enlace;
-        enlace.target = '_blank';
-        enlace.rel = 'noopener noreferrer';
-        el.original.appendChild(enlace);
-      }
       if (o.tipo === 'ejemplo') {
         var sociales = o.nombre.indexOf('Sociales') !== -1;
         var pe = crear('p', null, 'También podés probar el mismo ejemplo como ');
@@ -769,6 +755,7 @@
       return;
     }
     limpiarErrores();
+    el.pasoRevisar.hidden = true;
     el.pasoLeer.hidden = false;
     marcarPaso(3);
     renderizar();
@@ -784,6 +771,7 @@
     estado.textoExtraido = '';
     el.editable.value = '';
     el.lectura.innerHTML = '';
+    document.dispatchEvent(new CustomEvent('bermejo:material-nuevo'));
     el.archivoPdf.value = '';
     el.archivoFoto.value = '';
     el.camaraFoto.value = '';
@@ -797,11 +785,14 @@
     anunciar('Se borró el material anterior.');
   }
   $('#otro-material').addEventListener('click', otroMaterial);
+  $('#volver-cargar').addEventListener('click', function () {
+    el.pasoRevisar.hidden = true; el.pasoCargar.hidden = false; marcarPaso(1); enfocar(el.tCargar);
+  });
   $('#otro-material-2').addEventListener('click', otroMaterial);
 
   $('#volver-revisar').addEventListener('click', function (e) {
-    e.preventDefault();
-    enfocar(el.editable);
+    e.preventDefault(); el.pasoLeer.hidden = true; el.pasoRevisar.hidden = false;
+    marcarPaso(2); enfocar(el.editable);
   });
 
   var temporizador = null;
@@ -812,6 +803,25 @@
   }
   el.editable.addEventListener('input', programarRender);
 
+  /* Tres accesos visibles; los seis modos originales siguen disponibles. */
+  function reflejarAccesos() {
+    document.querySelectorAll('[data-modo-rapido]').forEach(function (b) {
+      var seleccionado = b.dataset.modoRapido === estado.modo ||
+        (b.dataset.modoRapido === 'imagenes' && estado.modo === 'pictogramas');
+      b.setAttribute('aria-pressed', String(seleccionado));
+    });
+  }
+  document.querySelectorAll('[data-modo-rapido]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var radio = document.querySelector('input[name="modo"][value="' + b.dataset.modoRapido + '"]');
+      radio.checked = true; radio.dispatchEvent(new Event('change', { bubbles: true }));
+      document.getElementById('t-resultado').scrollIntoView({block:'nearest'});
+    });
+  });
+  $('#elegir-pictogramas').addEventListener('click', function () {
+    var radio = document.querySelector('input[name="modo"][value="pictogramas"]');
+    radio.checked = true; radio.dispatchEvent(new Event('change', { bubbles: true }));
+  });
   /* ---------------- Paso 3: modos ---------------- */
   document.querySelectorAll('input[name="modo"]').forEach(function (radio) {
     radio.addEventListener('change', function () {
@@ -823,6 +833,7 @@
         $('#controles-' + m).hidden = m !== estado.modo;
       });
       el.nombreModo.textContent = NOMBRES_MODO[estado.modo];
+      reflejarAccesos();
       renderizar();
       anunciar('Forma elegida: ' + NOMBRES_MODO[estado.modo] + '. Los controles y el texto están a continuación.');
     });

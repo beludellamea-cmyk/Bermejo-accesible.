@@ -7,6 +7,7 @@
   <meta name="description" content="Conversación presencial con propuestas de traducción automática entre español y lenguas presentes en Formosa.">
   <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/navegacion.js" defer></script>
   <script src="js/preferencias.js"></script>
   <script src="js/asistente-global.js" defer></script>
   <script src="js/chat-config.js"></script>
@@ -27,40 +28,49 @@
           <span class="marca__lema">La información a tu manera</span>
         </span>
       </a>
-      <nav class="nav-principal" aria-label="Principal">
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="material.html">Acceder a mi material</a></li>
-          <li><a href="docente.html">Espacio docente</a></li>
-          <li><a href="qom.html" aria-current="page">Chat intercultural</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="ajustes" role="region" aria-labelledby="ajustes-titulo">
-      <div class="contenedor ajustes__fila">
-        <p class="ajustes__titulo" id="ajustes-titulo">Ajustes de lectura</p>
-        <div class="ajustes__grupo" role="group" aria-labelledby="letra-etiqueta">
-          <span class="ajustes__etiqueta" id="letra-etiqueta">Letra:</span>
-          <button type="button" class="boton boton--letra-mayuscula" data-letra-opcion="mayuscula" aria-pressed="true">Imprenta mayúscula</button>
-          <span class="ajustes__barra" aria-hidden="true">/</span>
-          <button type="button" class="boton boton--letra-habitual" data-letra-opcion="habitual" aria-pressed="false">Texto habitual</button>
-        </div>
-        <div class="ajustes__grupo" role="group" aria-labelledby="tam-etiqueta">
-          <span class="ajustes__etiqueta" id="tam-etiqueta">Tamaño del texto:</span>
-          <button type="button" class="boton" data-ajuste="achicar">Más chico</button>
-          <span class="ajustes__valor" id="tam-valor">100 %</span>
-          <button type="button" class="boton" data-ajuste="agrandar">Más grande</button>
-        </div>
-        <div class="ajustes__grupo" role="group" aria-labelledby="con-etiqueta">
-          <span class="ajustes__etiqueta" id="con-etiqueta">Contraste:</span>
-          <button type="button" class="boton" data-contraste-opcion="normal" aria-pressed="true">Normal</button>
-          <button type="button" class="boton" data-contraste-opcion="alto" aria-pressed="false">Alto</button>
-        </div>
-        <button type="button" class="boton" data-ajuste="restablecer">Restablecer ajustes</button>
-        <p class="visualmente-oculto" id="ajustes-anuncio" role="status" aria-live="polite"></p>
+      <div class="cabecera__acciones">
+        <button class="boton menu-abrir" type="button" aria-controls="menu-principal" aria-expanded="false">☰ Menú</button>
+        <details class="ajustes" id="ajustes">
+          <summary class="boton">⚙ Ajustes de accesibilidad</summary>
+          <div class="ajustes__fila">
+            <p class="ajustes__titulo" id="ajustes-titulo">Ajustes de lectura</p>
+            <div class="ajustes__grupo" role="group" aria-labelledby="letra-etiqueta">
+              <span class="ajustes__etiqueta" id="letra-etiqueta">Letra:</span>
+              <button type="button" class="boton boton--letra-mayuscula" data-letra-opcion="mayuscula" aria-pressed="true">Imprenta mayúscula</button>
+              <button type="button" class="boton boton--letra-habitual" data-letra-opcion="habitual" aria-pressed="false">Texto habitual</button>
+            </div>
+            <div class="ajustes__grupo" role="group" aria-labelledby="tam-etiqueta">
+              <span class="ajustes__etiqueta" id="tam-etiqueta">Tamaño del texto:</span>
+              <button type="button" class="boton" data-ajuste="achicar">Más chico</button>
+              <span class="ajustes__valor" id="tam-valor">100 %</span>
+              <button type="button" class="boton" data-ajuste="agrandar">Más grande</button>
+            </div>
+            <div class="ajustes__grupo" role="group" aria-labelledby="con-etiqueta">
+              <span class="ajustes__etiqueta" id="con-etiqueta">Contraste:</span>
+              <button type="button" class="boton" data-contraste-opcion="normal" aria-pressed="true">Normal</button>
+              <button type="button" class="boton" data-contraste-opcion="alto" aria-pressed="false">Alto</button>
+            </div>
+            <button type="button" class="boton" data-ajuste="restablecer">Restablecer ajustes</button>
+            <p class="visualmente-oculto" id="ajustes-anuncio" role="status" aria-live="polite"></p>
+          </div>
+        </details>
       </div>
     </div>
   </header>
+  <div class="sitio-grid">
+      <nav class="nav-principal" id="menu-principal" aria-label="Secciones principales">
+        <p class="nav-principal__titulo">Secciones</p>
+        <ul>
+          <li><a href="index.html"><span aria-hidden="true">⌂</span> Inicio</a></li>
+          <li><a href="material.html"><span aria-hidden="true">▤</span> Mi material</a></li>
+          <li><a href="docente.html"><span aria-hidden="true">✎</span> Espacio docente</a></li>
+          <li><a href="qom.html" aria-current="page"><span aria-hidden="true">▢</span> Chat intercultural</a></li>
+        </ul>
+        <div class="nav-principal__atajos">
+          <button type="button" class="boton" data-abrir-ajustes>⚙ Ajustes de accesibilidad</button>
+          <button type="button" class="boton" data-abrir-ayuda>❓ Necesito ayuda</button>
+        </div>
+      </nav>
 
 <main id="contenido" tabindex="-1">
  <div class="contenedor qom chat-intercultural">
@@ -107,6 +117,7 @@
   <p><a href="index.html">Volver al inicio</a></p>
  </div>
 </main>
+  </div>
   <footer class="pie">
     <div class="contenedor">
       <p><strong>Bermejo Accesible</strong> («La información a tu manera») es un proyecto de código abierto creado para una hackatón en Formosa. Funciona en el navegador: no pide cuentas y no guarda tus materiales.</p>

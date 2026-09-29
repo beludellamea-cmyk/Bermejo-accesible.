@@ -10,52 +10,51 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;display=swap">
   <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/navegacion.js" defer></script>
   <script src="js/preferencias.js"></script>
   <script src="js/asistente-global.js" defer></script>
-  <script src="js/voz-ayuda.js" defer></script>
 </head>
-<body>
+<body class="pagina-inicio">
 {{CABECERA}}
+  <dialog id="bienvenida" class="bienvenida" aria-labelledby="bienvenida-titulo" aria-describedby="bienvenida-descripcion">
+    <div class="bienvenida__contenido">
+      <p class="bienvenida__simbolo" aria-hidden="true">◖)))</p>
+      <h2 id="bienvenida-titulo">Bienvenido a Bermejo Accesible</h2>
+      <p id="bienvenida-descripcion">¿Cómo querés recorrer la página? Elegí una opción. Podés cambiarla después.</p>
+      <div class="bienvenida__opciones">
+        <button type="button" class="boton boton--principal" id="bienvenida-guiada">🔊 Escuchar y recibir ayuda</button>
+        <button type="button" class="boton" id="bienvenida-manual">✋ Explorar por mi cuenta</button>
+      </div>
+      <p class="ayuda">La voz comienza solo si elegís escuchar. Las indicaciones también aparecen escritas.</p>
+    </div>
+  </dialog>
   <main id="contenido" tabindex="-1" class="portada">
     <div class="contenedor">
-      <h1>Tu material, en la forma en que mejor leés.</h1>
-      <p class="intro">Pegá un texto, subí un PDF o una foto, o cargá un video con subtítulos o transcripción. Bermejo Accesible te deja revisar el texto y mostrarlo como lo necesites: con letra más grande, en voz alta, por partes, con imágenes o con pictogramas.</p>
-
-      <ul class="caminos">
-        <li>
-          <section class="camino" aria-labelledby="camino-material">
-            <h2 id="camino-material"><a href="material.html">Acceder a mi material</a></h2>
-            <p>Para estudiantes y cualquier persona que necesite leer un texto de otra forma.</p>
-            <ul>
-              <li>Pegá texto, subí un PDF, una foto o un video con su transcripción.</li>
-              <li>Corregí lo que salió mal.</li>
-              <li>Elegí cómo leerlo.</li>
-              <li>Probá el cuaderno de Sociales de Formosa.</li>
-            </ul>
-            <p class="camino__muestra" aria-hidden="true"><span>Aa</span><span>Aa</span><span>Aa</span></p>
-          </section>
-        </li>
-        <li>
-          <section class="camino camino--docente" aria-labelledby="camino-docente">
-            <h2 id="camino-docente"><a href="docente.html">Espacio docente</a></h2>
-            <p>Para preparar materiales que todo el curso pueda usar.</p>
-            <ul>
-              <li>Guía para detectar barreras.</li>
-              <li>Ideas prácticas con ejemplos.</li>
-              <li>«Contame qué pasa en tu aula»: orientaciones por situación.</li>
-              <li>Normativa provincial y nacional, con la Resolución 2481/24.</li>
-            </ul>
-            <p class="camino__muestra camino__muestra--numero" aria-hidden="true">2481/24</p>
-          </section>
-        </li>
+      <div class="portada__hero"><p class="portada__ceja">DESDE FORMOSA · PARA APRENDER SIN BARRERAS</p><h1>Bermejo Accesible</h1><p class="intro">La información a tu manera.</p><p>Elegí por dónde empezar:</p></div>
+      <ul class="caminos caminos--inicio">
+        <li><section class="camino" aria-labelledby="camino-material">
+          <p class="camino__icono" aria-hidden="true"><svg viewBox="0 0 48 48" role="presentation" focusable="false"><path d="M24 11c-6-3-12-3-18-1v27c6-2 12-2 18 1 6-3 12-3 18-1V10c-6-2-12-2-18 1Z"/><path d="M24 11v27M11 17c3-.7 6-.4 9 .7M28 17c3-1.1 6-1.4 9-.7M11 23c3-.7 6-.4 9 .7"/></svg></p>
+          <h2 id="camino-material"><a href="material.html">Trabajar con mi material</a></h2>
+          <p>Cargá un texto, PDF o foto. Elegí cómo acceder y hacé una actividad relacionada.</p>
+          <span class="camino__accion" aria-hidden="true">Empezar →</span>
+        </section></li>
+        <li><section class="camino camino--docente" aria-labelledby="camino-docente">
+          <p class="camino__icono" aria-hidden="true"><svg viewBox="0 0 48 48" role="presentation" focusable="false"><rect x="7" y="7" width="34" height="25" rx="3"/><path d="M15 39h18M24 32v7M13 15h17M13 21h11M33 20l5 5"/></svg></p>
+          <h2 id="camino-docente"><a href="docente.html">Soy docente</a></h2>
+          <p>Encontrá orientaciones para crear y revisar materiales accesibles.</p>
+          <span class="camino__accion" aria-hidden="true">Entrar →</span>
+        </section></li>
+        <li><section class="camino camino--chat" aria-labelledby="camino-chat">
+          <p class="camino__icono" aria-hidden="true"><svg viewBox="0 0 48 48" role="presentation" focusable="false"><path d="M6 9h25a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H17l-8 6v-6H6a3 3 0 0 1-3-3V12a3 3 0 0 1 3-3Z"/><path d="M18 17h12M12 24h18"/></svg></p>
+          <h2 id="camino-chat"><a href="qom.html">Quiero comunicarme</a></h2>
+          <p>Usá el chat intercultural. Revisá las traducciones automáticas.</p>
+          <span class="camino__accion" aria-hidden="true">Abrir chat →</span>
+        </section></li>
       </ul>
-
-      <section class="seccion-docente" aria-labelledby="qom-portada-titulo">
-        <h2 id="qom-portada-titulo"><a href="qom.html">Chat intercultural: conversemos en la escuela</a></h2>
-        <p>Estudiante y docente escriben por turnos en la misma pantalla. La inteligencia artificial propone la traducción de cada mensaje entre español y qom, wichí, pilagá, nivaclé o guaraní. Las traducciones automáticas pueden contener errores.</p>
-      </section>
-
-
+      <p class="inicio-ayuda">¿No sabés qué elegir? <button type="button" class="boton" data-abrir-ayuda>Estoy perdido</button></p>
+      <details class="inicio-informacion" id="informacion">
+        <summary>Más información sobre el sitio y las opciones de lectura</summary>
+        <div class="inicio-informacion__contenido">
       <section class="lector-ayuda" aria-labelledby="lector-titulo">
         <h2 id="lector-titulo">¿Usás un lector de pantalla?</h2>
         <p>Podés usar el lector que ya trae tu dispositivo. No hace falta instalar nada ni activarlo desde esta web.</p>
@@ -83,7 +82,7 @@
       <section aria-labelledby="como-titulo">
         <h2 id="como-titulo">Cómo funciona</h2>
         <ol class="pasos-lista">
-          <li><h3>Cargá tu material</h3><p>Texto pegado, archivo PDF, foto o video con subtítulos o transcripción. También podés probar con ejemplos.</p></li>
+          <li><h3>Cargá tu material</h3><p>Texto pegado, archivo PDF o foto. También podés probar con ejemplos.</p></li>
           <li><h3>Revisá el texto</h3><p>La lectura automática puede equivocarse. Corregí lo necesario. El original sigue disponible.</p></li>
           <li><h3>Elegí cómo leer</h3><p>Cambiá de forma cuando quieras. Tus ajustes se mantienen.</p></li>
         </ol>
@@ -91,9 +90,11 @@
 
       <section class="nota-privacidad" aria-labelledby="privacidad-titulo">
         <h2 id="privacidad-titulo">Tus archivos se quedan en tu dispositivo</h2>
-        <p>El texto de tus fotos y PDF se lee dentro de tu navegador. Los videos y sus subtítulos también se abren en tu dispositivo. No hace falta crear una cuenta y la web no guarda tus materiales: al cerrar la pestaña, se borran.</p>
+        <p>El texto de tus fotos y PDF se lee dentro de tu navegador. No hace falta crear una cuenta y la web no guarda tus materiales: al cerrar la pestaña, se borran.</p>
         <p>La primera vez, el navegador descarga las herramientas de lectura (PDF.js y Tesseract.js) y el idioma español. Si elegís «Texto con pictogramas», se envían a ARASAAC solo algunas palabras sueltas para buscar cada pictograma, y te avisamos antes.</p>
       </section>
+        </div>
+      </details>
     </div>
   </main>
 {{PIE}}
