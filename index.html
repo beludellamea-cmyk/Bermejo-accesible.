@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;display=swap">
   <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/renovacion.css">
   <script src="js/navegacion.js" defer></script>
   <script src="js/preferencias.js"></script>
   <script src="js/asistente-global.js" defer></script>
@@ -19,11 +20,7 @@
   <header class="cabecera">
     <div class="contenedor cabecera__fila">
       <a class="marca" href="index.html">
-        <svg class="marca__logo" viewBox="0 0 64 52" width="64" height="52" aria-hidden="true" focusable="false">
-          <path class="logo__pagina" d="M32 13 C25 7 13 6 4 9 V44 C13 41 25 42 32 48 Z"/>
-          <path class="logo__pagina" d="M32 13 C39 7 51 6 60 9 V44 C51 41 39 42 32 48 Z"/>
-          <path class="logo__rio" d="M9 35 C15 35 16 25 22 25 C28 25 28 36 34 36 C40 36 41 22 47 22 C51 22 53 26 55 27"/>
-        </svg>
+        <img class="marca__logo" src="img/simbolo-bermejo.svg" alt="" width="112" height="112">
         <span class="marca__textos">
           <span class="marca__nombre">Bermejo <span class="marca__acento">Accesible</span></span>
           <span class="marca__lema">La información a tu manera</span>
@@ -87,7 +84,35 @@
   </dialog>
   <main id="contenido" tabindex="-1" class="portada">
     <div class="contenedor">
-      <div class="portada__hero"><p class="portada__ceja">DESDE FORMOSA · PARA APRENDER SIN BARRERAS</p><h1>Bermejo Accesible</h1><p class="intro">La información a tu manera.</p><p>Elegí por dónde empezar:</p></div>
+      <div class="portada__hero">
+        <div class="hero__texto">
+          <p class="portada__ceja">DESDE FORMOSA · MÁS FORMAS DE APRENDER</p>
+          <h1>Tu material, en la forma en que mejor <em>lo leés.</em></h1>
+          <p class="intro">Un texto, un PDF o una foto pueden convertirse en una experiencia de lectura más clara: escuchá, leé por partes o explorá con imágenes y pictogramas.</p>
+          <div class="hero__acciones">
+            <a class="boton boton--principal" href="material.html">📂 Acceder a mi material →</a>
+            <a class="boton" href="docente.html">Explorar espacio docente →</a>
+          </div>
+          <p class="hero__nota">Sin crear una cuenta. Conservás tu material original y elegís los apoyos que te sirven.</p>
+        </div>
+        <div class="hero__visual">
+          <img src="img/hero-inclusion.svg" alt="Ilustración de lectura accesible con un libro, audio, imágenes y distintas formas de ver el texto" width="760" height="590">
+        </div>
+      </div>
+      <section aria-labelledby="beneficios-titulo" class="seccion-beneficios">
+        <div class="feature-intro">
+          <h2 id="beneficios-titulo">La misma información, más caminos para comprenderla</h2>
+          <p>Herramientas claras y fáciles de usar, a tu ritmo y a tu manera.</p>
+        </div>
+        <ul class="beneficios">
+          <li><span class="beneficio__icono" aria-hidden="true">📄</span><strong>Texto, PDF o foto</strong><p>Cargá un archivo o sacá una foto y revisá el texto.</p></li>
+          <li><span class="beneficio__icono" aria-hidden="true">🎧</span><strong>Escuchá la lectura</strong><p>Activá la voz y seguí el contenido.</p></li>
+          <li><span class="beneficio__icono" aria-hidden="true">📖</span><strong>Leé por partes</strong><p>Avanzá paso a paso, sin apurarte.</p></li>
+          <li><span class="beneficio__icono" aria-hidden="true">🖼️</span><strong>Apoyos visuales</strong><p>Combiná texto con imágenes y pictogramas.</p></li>
+          <li><span class="beneficio__icono" aria-hidden="true">✨</span><strong>Más opciones</strong><p>Ajustá letra, contraste y actividades de práctica.</p></li>
+        </ul>
+      </section>
+      <div class="caminos-encabezado"><h2>¿Por dónde querés empezar?</h2><p>Elegí el recorrido que más se adapte a lo que necesitás.</p></div>
       <ul class="caminos caminos--inicio">
         <li><section class="camino" aria-labelledby="camino-material">
           <p class="camino__icono" aria-hidden="true"><svg viewBox="0 0 48 48" role="presentation" focusable="false"><path d="M24 11c-6-3-12-3-18-1v27c6-2 12-2 18 1 6-3 12-3 18-1V10c-6-2-12-2-18 1Z"/><path d="M24 11v27M11 17c3-.7 6-.4 9 .7M28 17c3-1.1 6-1.4 9-.7M11 23c3-.7 6-.4 9 .7"/></svg></p>
