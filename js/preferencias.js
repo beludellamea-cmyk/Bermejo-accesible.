@@ -13,7 +13,7 @@
 
   var CLAVE = 'bermejo-accesible-preferencias';
   var ESCALAS = [100, 115, 130, 150, 175, 200];
-  var INICIALES = { escala: 100, contraste: 'normal', letra: 'mayuscula' };
+  var INICIALES = { escala: 100, contraste: 'normal', letra: 'habitual' };
   var pref = { escala: INICIALES.escala, contraste: INICIALES.contraste, letra: INICIALES.letra };
 
   try {
